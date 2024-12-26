@@ -15,10 +15,10 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "votes")
+    @Column(name = "votes", nullable = false)
     private int votes = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
