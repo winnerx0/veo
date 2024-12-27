@@ -3,6 +3,7 @@ package com.winnerezy.Veo.services;
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
+import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.OptionRepository;
 import com.winnerezy.Veo.repositories.PollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,12 @@ public class PollService {
     @Autowired
     private OptionRepository optionRepository;
 
-    public Poll createPoll(PollDTO pollDTO){
+    public Poll createPoll(PollDTO pollDTO) {
         try {
             Poll poll = new Poll();
             poll.setTitle(pollDTO.getTitle());
             poll.setUser(userService.getCurrentUser());
+            poll.setEnding(pollDTO.getEnding());
 
             Poll createdPoll = pollRepository.save(poll);
 
@@ -46,6 +48,25 @@ public class PollService {
             System.out.println(e.getMessage());
             throw new RuntimeException();
         }
+
     }
 
+    public String votePoll(long id, long optionId) {
+        try {
+
+             Option option = optionRepository.findByPollIdAndId(id, optionId).get();
+
+             User user = userService.getCurrentUser();
+
+            if(option.getVotes().contains(user.getEmail())){
+                option.setVotes((List<String>) option.getVotes().stream().filter(vote -> !vote.equals(user.getEmail())));
+            } else {
+                option.getVotes().add(user.getEmail());
+            }
+            optionRepository.save(option);
+            return "Voted Successfully";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }

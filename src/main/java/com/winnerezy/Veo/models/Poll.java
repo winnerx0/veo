@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,9 @@ public class Poll {
 
     @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "ending")
+    private Date ending;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     private List<Option> options = new ArrayList<>();

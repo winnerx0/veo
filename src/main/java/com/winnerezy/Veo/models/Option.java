@@ -3,6 +3,9 @@ package com.winnerezy.Veo.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "option")
 @Getter
@@ -18,8 +21,9 @@ public class Option {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "votes", nullable = false)
-    private int votes = 0;
+    @ElementCollection
+    @Column(name = "votes")
+    private List<String> votes = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "poll_id", nullable = false)

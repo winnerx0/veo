@@ -5,10 +5,8 @@ import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/poll")
 @RestController
@@ -18,7 +16,7 @@ public class PollController {
     private PollService pollService;
 
     @PostMapping("/create")
-    public ResponseEntity<Poll> createPoll(@RequestBody PollDTO poll) {
+    public ResponseEntity<Poll> createPoll(@RequestBody @Validated PollDTO poll) {
         try {
             System.out.println("Request received: " + poll);
             Poll createdPoll = pollService.createPoll(poll);
@@ -27,6 +25,16 @@ public class PollController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).build();
+        }
+    }
+
+    @PostMapping("/{id}/vote/{optionId}")
+    public ResponseEntity<String> votePoll(@PathVariable("id") long id, @PathVariable("optionId") long optionId) {
+        try {
+            String votePoll = pollService.votePoll(id, optionId);
+            return ResponseEntity.ok(votePoll);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 
