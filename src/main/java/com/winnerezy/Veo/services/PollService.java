@@ -80,4 +80,18 @@ public class PollService {
             return e.getMessage();
         }
     }
+
+    public String deletePoll(long id) {
+     try {
+         Poll poll = pollRepository.findById(id).orElse(null);
+
+         if(poll == null){
+             return "Poll Not Found";
+         }
+         pollRepository.deleteById(id);
+         return "Poll Deleted";
+     } catch (Exception e) {
+         return e.getMessage();
+     }
+    }
 }

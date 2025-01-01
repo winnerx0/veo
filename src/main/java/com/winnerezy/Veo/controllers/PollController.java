@@ -42,4 +42,18 @@ public class PollController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePoll(@PathVariable("id") long id) {
+        try {
+            String response = pollService.deletePoll(id);
+
+            if(response.equals("Poll Not Found")){
+                return ResponseEntity.status(404).body(response);
+            }
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
 }
