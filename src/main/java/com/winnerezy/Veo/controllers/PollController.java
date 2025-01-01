@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/poll")
+@RequestMapping(value = "api/v1/poll", method = RequestMethod.POST)
 @RestController
 public class PollController {
 
@@ -32,6 +32,10 @@ public class PollController {
     public ResponseEntity<String> votePoll(@PathVariable("id") long id, @PathVariable("optionId") long optionId) {
         try {
             String votePoll = pollService.votePoll(id, optionId);
+
+            if(votePoll.equals("Poll Expired")){
+                return ResponseEntity.status(401).body(votePoll);
+            }
             return ResponseEntity.ok(votePoll);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());

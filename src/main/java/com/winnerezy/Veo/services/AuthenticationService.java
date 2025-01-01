@@ -34,18 +34,17 @@ public class AuthenticationService {
     }
 
     public Object register(RegisterDTO registerDTO) {
-        System.out.println(registerDTO);
+
+        if(userRepository.existsByEmail(registerDTO.getEmail())){
+          return "Email already in use";
+        }
+
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setJoinedAt(new Date());
 
-        User registeredUser = userRepository.findByEmail(registerDTO.getEmail()).orElse(null);
-
-        if(registeredUser != null){
-            return "User with email exists";
-        }
         return userRepository.save(user);
     }
 

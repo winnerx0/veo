@@ -12,8 +12,8 @@ import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
-@RequestMapping(value = "/auth", method = {RequestMethod.POST})
 @RestController
+@RequestMapping(value = "api/v1/auth", method = RequestMethod.POST)
 public class AuthenticationController {
     
     @Autowired
@@ -24,7 +24,7 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<Object> register(@RequestBody RegisterDTO registerUserDto) {
-        System.out.println(registerUserDto);
+        System.out.println("Registering user with details: " + registerUserDto);
         Object registeredUser = authenticationService.register(registerUserDto);
 
         return ResponseEntity.ok(registeredUser);

@@ -36,8 +36,6 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Poll> polls;
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

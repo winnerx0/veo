@@ -9,7 +9,9 @@ import com.winnerezy.Veo.repositories.PollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PollService {
@@ -54,17 +56,26 @@ public class PollService {
     public String votePoll(long id, long optionId) {
         try {
 
-             Option option = optionRepository.findByPollIdAndId(id, optionId).get();
+            Poll poll = pollRepository.findById(id).orElseThrow();
+
+             Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
 
              User user = userService.getCurrentUser();
 
+             if(poll.getEnding().before(new Date())){
+                 return "Poll Expired";
+             }
+
             if(option.getVotes().contains(user.getEmail())){
-                option.setVotes((List<String>) option.getVotes().stream().filter(vote -> !vote.equals(user.getEmail())));
+                option.setVotes(option.getVotes().stream().filter(vote -> !vote.equals(user.getEmail())).collect(Collectors.toList()));
+                optionRepository.save(option);
+                return "Unvoted Successfully";
             } else {
                 option.getVotes().add(user.getEmail());
+                optionRepository.save(option);
+                return "Voted Successfully";
             }
-            optionRepository.save(option);
-            return "Voted Successfully";
+
         } catch (Exception e) {
             return e.getMessage();
         }
