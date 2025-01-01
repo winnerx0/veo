@@ -88,6 +88,10 @@ public class PollService {
          if(poll == null){
              return "Poll Not Found";
          }
+
+         if(!poll.getUser().equals(userService.getCurrentUser())){
+             return "You don't have permission to delete this poll";
+         }
          pollRepository.deleteById(id);
          return "Poll Deleted";
      } catch (Exception e) {
