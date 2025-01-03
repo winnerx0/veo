@@ -7,3 +7,12 @@ html #root {
     margin: 0;
     box-sizing: border-box;
 }
+
+h3 {
+    font-size: clamp(10px, 7vw, 80px);
+}
+
+
+h5 {
+    font-size: clamp(5px, 5vw, 30px);
+}

@@ -41,7 +41,7 @@ const Register = () => {
   }
 };
   return (
-    <div className="relative border w-full max-w-[500px] h-[450px] gap-4 rounded-md p-6 flex flex-col items-center justify-center">
+    <div className="shadow-sm relative border w-full max-w-[500px] h-[450px] gap-4 rounded-md p-6 flex flex-col items-center justify-center">
       <h3 className="font-semibold text-2xl absolute top-4 left-4">
         Register to Veo
       </h3>
@@ -54,7 +54,7 @@ const Register = () => {
             type="text"
             name="username"
             placeholder="michael"
-            className="border w-full h-8 p-2"
+              className="border border-zinc-100 w-full h-8 p-2 rounded-md outline-none focus:border focus:border-orange-400"
             value={data.username}
             onChange={handleChange}
           />
@@ -67,8 +67,8 @@ const Register = () => {
             <input
               type="email"
               name="email"
-              className="border w-full h-8 p-2"
               placeholder="michael@gmail.com"
+              className="border border-zinc-100 w-full h-8 p-2 rounded-md outline-none focus:border focus:border-orange-400"
               value={data.email}
               onChange={handleChange}
             />
@@ -79,7 +79,7 @@ const Register = () => {
           <input
             type="password"
             name="password"
-            className="border w-full h-8 p-2"
+              className="border border-zinc-100 w-full h-8 p-2 rounded-md outline-none focus:border focus:border-orange-400"
             placeholder="michael1234"
             value={data.password}
             onChange={handleChange}
