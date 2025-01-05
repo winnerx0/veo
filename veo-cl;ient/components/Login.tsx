@@ -44,7 +44,7 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex flex-col py-6 px-4 gap-4 border w-[400px]">
+    <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl">
       <h1 className="text-3xl font-bold">Login To Veo</h1>
 
       <div>
