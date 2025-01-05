@@ -93,12 +93,6 @@
     </dependencies>
 
     <build>
-        <sourceDirectory>Veo/veo-server/src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>Veo/veo-server/src/main/resources</directory>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
