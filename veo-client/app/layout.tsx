@@ -25,12 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
         <ReactQueryProvider>
-          <main className="flex flex-col px-4">
             <Header/>
+          <main className="flex flex-col px-4 items-center">
           {children}
+          <footer className="absolute bottom-4">
+            <span>&copy; 2025 All Rights Reserved</span>
+          </footer>
           </main>
         </ReactQueryProvider>
       </body>

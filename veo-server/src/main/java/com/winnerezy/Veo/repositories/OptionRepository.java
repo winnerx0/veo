@@ -1,10 +1,11 @@
 package com.winnerezy.Veo.repositories;
 
-import com.winnerezy.Veo.models.Option;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.winnerezy.Veo.models.Option;
 
 @Repository
 public interface OptionRepository extends JpaRepository<Option, Long> {
