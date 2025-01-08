@@ -53,7 +53,7 @@ public class PollService {
 
     }
 
-    public String votePoll(long id, long optionId) {
+    public String votePoll(String id, String optionId) {
         try {
 
             Poll poll = pollRepository.findById(id).orElseThrow();
@@ -81,7 +81,7 @@ public class PollService {
         }
     }
 
-    public String deletePoll(long id) {
+        public String deletePoll(String id) {
      try {
          Poll poll = pollRepository.findById(id).orElse(null);
 

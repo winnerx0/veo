@@ -15,8 +15,8 @@ import java.util.List;
 public class Option {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "name", nullable = false)
     private String name;

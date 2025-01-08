@@ -29,7 +29,7 @@ public class PollController {
     }
 
     @PostMapping("/{id}/vote/{optionId}")
-    public ResponseEntity<String> votePoll(@PathVariable("id") long id, @PathVariable("optionId") long optionId) {
+    public ResponseEntity<String> votePoll(@PathVariable("id") String id, @PathVariable("optionId") String optionId) {
         try {
             String votePoll = pollService.votePoll(id, optionId);
 
@@ -43,7 +43,7 @@ public class PollController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deletePoll(@PathVariable("id") long id) {
+    public ResponseEntity<String> deletePoll(@PathVariable("id") String id) {
         try {
             String response = pollService.deletePoll(id);
 

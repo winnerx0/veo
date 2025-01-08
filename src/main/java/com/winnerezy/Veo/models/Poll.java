@@ -19,8 +19,8 @@ import java.util.List;
 public class Poll {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @Column(name = "title", nullable = false)
     private String title;

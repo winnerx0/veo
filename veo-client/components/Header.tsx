@@ -3,7 +3,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-     <header className='w-full h-10 flex items-center px-4 border border-b bg-background z-50'>
+     <header className='fixed w-full h-12 flex items-center px-4 border border-b bg-background z-50'>
         <Link href={'/home'} className='font-bold text-primary'>Veo</Link>
 
      </header> 
