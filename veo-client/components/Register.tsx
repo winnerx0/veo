@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,42 +23,42 @@ const initialState = {
 
 const Register = () => {
   const [data, setData] = useState<Register>(initialState);
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  setError(null)
-  
+    setError(null);
   };
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleRegister = async () => {
-    try {
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/signup",
-        data,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          }
-        }
-      );
-      const ans = res.data;
-      if(res.status !== 200){
-        setError(ans)
+    const res = await axios.post(
+      "http://localhost:8080/api/v1/auth/signup",
+      data,
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       }
-      console.log(ans);
-      // router.push('/login')
-    } catch (error) {
-      console.log(error);
-      if(error instanceof AxiosError){
-        setError(error.response?.data)
-      }
-    }
+    );
+    const ans = res.data;
+
+    console.log(ans);
+    router.push('/login')
   };
-        console.log(error)
+  const { mutate, isPending } = useMutation({ 
+    mutationFn: handleRegister,
+    mutationKey: ["register"],
+    onError(error) {
+      if(error instanceof AxiosError){
+          setError(error.response?.data)
+
+        }
+    },
+  })
+  console.log(error);
   return (
     <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl">
       <h1 className="text-3xl font-bold">Register To Veo</h1>
@@ -92,15 +93,20 @@ const Register = () => {
           onChange={handleChange}
         />
       </div>
-      <span  className="text-destructive text-center">{error}</span>
+      <span className="text-destructive text-center">{error}</span>
       <p>
         Have an account ?{" "}
         <Link className="text-primary" href={"/login"}>
           Login
         </Link>
       </p>
-      <Button onClick={handleRegister}>Register</Button>
-    </div>
+      <Button disabled={isPending || Object.values(data).some((value: string) => value.trim() === "")} onClick={() => mutate()}>
+        
+      {
+        isPending ? <span className="loader"></span> : "Register"
+      } 
+        </Button>
+  </div>
   );
 };
 

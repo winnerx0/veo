@@ -3,9 +3,13 @@ package com.winnerezy.Veo.controllers;
 import com.winnerezy.Veo.dto.LoginDTO;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import com.winnerezy.Veo.dto.RegisterDTO;
@@ -24,7 +28,11 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody RegisterDTO registerUserDto) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO registerUserDto, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
      try {
          System.out.println("Registering user with details: " + registerUserDto);
          User registeredUser = authenticationService.register(registerUserDto);
@@ -39,22 +47,28 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
-        User authenticatedUser = authenticationService.authenticate(loginUserDto);
+    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
+       try {
+           User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
-        System.out.println(authenticatedUser);
+           System.out.println(authenticatedUser);
 
-        String jwtToken = jwtService.generateToken(authenticatedUser);
+           String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        Cookie cookie = new Cookie("token", jwtToken);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setSecure(true);
-        cookie.setMaxAge((int) jwtService.getExpiration());
+           Cookie cookie = new Cookie("token", jwtToken);
+           cookie.setHttpOnly(true);
+           cookie.setPath("/");
+           cookie.setSecure(true);
+           cookie.setMaxAge((int) jwtService.getExpiration());
 
-        response.addCookie(cookie);
+           response.addCookie(cookie);
 
-        return ResponseEntity.ok(jwtToken);
+           return ResponseEntity.ok(jwtToken);
+       } catch (BadCredentialsException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+       } catch (Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication failed");
+    }
     }
 
 }
