@@ -33,10 +33,10 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Object register(RegisterDTO registerDTO) {
+    public User register(RegisterDTO registerDTO) {
 
         if(userRepository.existsByEmail(registerDTO.getEmail())){
-          return "Email already in use";
+            throw new IllegalArgumentException("Email already exists");
         }
 
         User user = new User();

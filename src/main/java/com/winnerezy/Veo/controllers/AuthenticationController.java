@@ -4,6 +4,7 @@ import com.winnerezy.Veo.dto.LoginDTO;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +24,18 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> register(@RequestBody RegisterDTO registerUserDto) {
-        System.out.println("Registering user with details: " + registerUserDto);
-        Object registeredUser = authenticationService.register(registerUserDto);
+    public ResponseEntity<?> register(@RequestBody RegisterDTO registerUserDto) {
+     try {
+         System.out.println("Registering user with details: " + registerUserDto);
+         User registeredUser = authenticationService.register(registerUserDto);
 
-        return ResponseEntity.ok(registeredUser);
+         return ResponseEntity.ok(registeredUser);
+     } catch (Exception e) {
+         e.printStackTrace();
+         return ResponseEntity
+                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                 .body(e.getMessage());
+     }
     }
 
     @PostMapping("/login")

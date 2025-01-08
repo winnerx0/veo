@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 interface Register {
@@ -21,10 +22,15 @@ const initialState = {
 
 const Register = () => {
   const [data, setData] = useState<Register>(initialState);
+  const [error, setError] = useState<string | null>(null)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  setError(null)
+  
   };
+
+  const router = useRouter()
 
   const handleRegister = async () => {
     try {
@@ -35,16 +41,23 @@ const Register = () => {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-          },
-          withCredentials: true
+          }
         }
       );
       const ans = res.data;
+      if(res.status !== 200){
+        setError(ans)
+      }
       console.log(ans);
+      // router.push('/login')
     } catch (error) {
       console.log(error);
+      if(error instanceof AxiosError){
+        setError(error.response?.data)
+      }
     }
   };
+        console.log(error)
   return (
     <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl">
       <h1 className="text-3xl font-bold">Register To Veo</h1>
@@ -52,6 +65,7 @@ const Register = () => {
         <Label>Username</Label>
         <Input
           placeholder="michael"
+          name="username"
           value={data.username}
           onChange={handleChange}
         />
@@ -62,6 +76,7 @@ const Register = () => {
         <Input
           placeholder="michael@gmail.com"
           type="email"
+          name="email"
           value={data.email}
           onChange={handleChange}
         />
@@ -72,10 +87,12 @@ const Register = () => {
         <Input
           placeholder="michael1234"
           type="password"
+          name="password"
           value={data.password}
           onChange={handleChange}
         />
       </div>
+      <span  className="text-destructive text-center">{error}</span>
       <p>
         Have an account ?{" "}
         <Link className="text-primary" href={"/login"}>

@@ -5,49 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeFeature.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomeFeature.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomeTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/VeoApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/config/ApiErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/config/ApplicationConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/dto/LoginDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/dto/PollDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/dto/RegisterDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/models/Option.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/models/Poll.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/models/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/repositories/OptionRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/repositories/PollRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/repositories/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/services/JwtService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/services/PollService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/java/com/winnerezy/Veo/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-server/src/test/java/com/winnerezy/Veo/VeoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Register.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +96,7 @@
       <workItem from="1735738756005" duration="334000" />
       <workItem from="1735742001827" duration="1427000" />
       <workItem from="1735900471513" duration="1704000" />
+      <workItem from="1736322945517" duration="2056000" />
     </task>
     <servers />
   </component>
