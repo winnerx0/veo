@@ -3,10 +3,13 @@ package com.winnerezy.Veo.controllers;
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping(value = "api/v1/poll", method = RequestMethod.POST)
 @RestController
@@ -15,12 +18,21 @@ public class PollController {
     @Autowired
     private PollService pollService;
 
-    @PostMapping("/create")
-    public ResponseEntity<Poll> createPoll(@RequestBody @Validated PollDTO poll) {
+    @GetMapping("/")
+    public ResponseEntity<List<Poll>> getPolls() {
         try {
-            System.out.println("Request received: " + poll);
+            List<Poll> polls = pollService.getPolls();
+            return ResponseEntity.ok(polls);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Poll> createPoll(@RequestBody @Valid PollDTO poll) {
+        try {
             Poll createdPoll = pollService.createPoll(poll);
-            System.out.println("Poll created: " + createdPoll);
             return ResponseEntity.ok(createdPoll);
         } catch (Exception e) {
             e.printStackTrace();

@@ -11,4 +11,5 @@ import com.winnerezy.Veo.models.User;
 @Repository
 public interface PollRepository extends JpaRepository<Poll, String> {
 
+    Poll[] findByUser(User user);
 }

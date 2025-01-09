@@ -9,6 +9,8 @@ import com.winnerezy.Veo.repositories.PollRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,14 @@ public class PollService {
     private UserService userService;
     @Autowired
     private OptionRepository optionRepository;
+
+    public List<Poll> getPolls() {
+        Poll[] polls = pollRepository.findByUser(userService.getCurrentUser());
+        if(polls == null){
+            return new ArrayList<>();
+        }
+        return Arrays.stream(polls).toList();
+    }
 
     public Poll createPoll(PollDTO pollDTO) {
         try {

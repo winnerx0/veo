@@ -6,18 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/LoginDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/LoginDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/RegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/RegisterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/repositories/PollRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/repositories/PollRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/home/pagr.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/veo-client/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/veo-client/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeFeature.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeSection.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeTitle.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +110,7 @@
       <workItem from="1736340895996" duration="4505000" />
       <workItem from="1736345711079" duration="1150000" />
       <workItem from="1736346893174" duration="2520000" />
+      <workItem from="1736410412350" duration="3502000" />
     </task>
     <servers />
   </component>

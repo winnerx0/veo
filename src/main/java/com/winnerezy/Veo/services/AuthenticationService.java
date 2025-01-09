@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.winnerezy.Veo.dto.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Service
 public class AuthenticationService {
@@ -50,10 +53,12 @@ public class AuthenticationService {
 
     public User authenticate(LoginDTO loginDTO){
 
+        User user = userRepository.findByEmail(loginDTO.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
-        return userRepository.findByEmail(loginDTO.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
     }
 
     
