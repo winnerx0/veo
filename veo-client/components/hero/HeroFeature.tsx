@@ -11,7 +11,7 @@ import {
 import { features } from "@/lib";
 import { motion } from "motion/react";
 
-const HomeFeature = () => {
+const HeroFeature = () => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -35,4 +35,4 @@ const HomeFeature = () => {
   );
 };
 
-export default HomeFeature;
+export default HeroFeature;

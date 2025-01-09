@@ -7,6 +7,7 @@ import { Label } from "./ui/label";
 import axios, { AxiosError } from "axios";
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 interface Login {
   email: string;
@@ -22,6 +23,8 @@ const Login = () => {
   const [data, setData] = useState<Login>(initialState);
   const [error, setError] = useState<string | null>(null);
 
+  const router = useRouter()
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setError(null);
@@ -29,7 +32,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const res = await axios.post(
-      "http://localhost:8080/api/v1/auth/login",
+      "https://veo-v54e.onrender.com/api/v1/auth/login",
       data,
       {
         headers: {
@@ -40,6 +43,7 @@ const Login = () => {
       }
     );
     const ans = res.data;
+    router.push('/home')
   };
   const { mutate, isPending } = useMutation({
     mutationFn: handleLogin,
