@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 const page = () => {
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full max-w-6xl">
      <HomeTopBar/> 
      <HomePolls/>
     </div>

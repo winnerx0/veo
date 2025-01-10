@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const page = ({ params: { pollId } }: { params: { pollId: string } }) => {
   return (
     <div>
       
