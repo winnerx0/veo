@@ -13,7 +13,7 @@ const HomeTopBar = () => {
 
       <div className="w-full flex items-center justify-between">
         <h1 className='font-bold text-xl'>Your Polls</h1>
-        <Button onClick={() => router.push('/new-poll')}>Create Poll</Button>
+        <Button onClick={() => router.push('/poll/create')}>Create Poll</Button>
       </div>
     </div>
   )

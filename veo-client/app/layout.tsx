@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReactQueryProvider from "@/components/ReactQueryProvider";
 import Header from "@/components/Header";
+import { ToastContainer } from "react-toastify";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +29,15 @@ export default function RootLayout({
     <html lang="en" className="">
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
         <ReactQueryProvider>
-            <Header/>
+          <Header />
           <main className="flex flex-col px-4 items-center">
-          {children}
-          <footer className="absolute bottom-4">
-            <span>&copy; 2025 All Rights Reserved</span>
-          </footer>
+            {children}
+            <footer className="absolute bottom-4">
+              <span>&copy; 2025 All Rights Reserved</span>
+            </footer>
           </main>
         </ReactQueryProvider>
+        <ToastContainer hideProgressBar theme="light" />
       </body>
     </html>
   );
