@@ -5,13 +5,16 @@ import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@RequestMapping(value = "api/v1/poll", method = RequestMethod.POST)
+@RequestMapping( "api/v1/poll")
 @RestController
 public class PollController {
 
@@ -19,9 +22,9 @@ public class PollController {
     private PollService pollService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Poll>> getPolls() {
+    public ResponseEntity<Poll[]> getPolls() {
         try {
-            List<Poll> polls = pollService.getPolls();
+            Poll[] polls = pollService.getPolls();
             return ResponseEntity.ok(polls);
         } catch (Exception e) {
             e.printStackTrace();
@@ -30,13 +33,18 @@ public class PollController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Poll> createPoll(@RequestBody @Valid PollDTO poll) {
+    public ResponseEntity<?> createPoll(@Valid @RequestBody PollDTO poll) {
         try {
+
             Poll createdPoll = pollService.createPoll(poll);
             return ResponseEntity.ok(createdPoll);
-        } catch (Exception e) {
+        }
+        catch (RuntimeException e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
         }
     }
 

@@ -53,7 +53,7 @@ const Create = () => {
     mutationKey: ["poll"],
     mutationFn: async (body: PollValidator) => {
       const res = await axios.post(
-        "https://veo-v54e.onrender.com/api/v1/pjoll/create",
+        "http://localhost:8080/api/v1/poll/create",
         body,
         {
           withCredentials: true,
@@ -68,8 +68,8 @@ const Create = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof PollValidator>) {
-    await mutate(values);
+   function onSubmit(values: z.infer<typeof PollValidator>) {
+     mutate(values);
   }
   return (
     <Form {...form}>

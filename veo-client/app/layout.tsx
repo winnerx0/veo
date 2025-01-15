@@ -29,13 +29,15 @@ export default function RootLayout({
     <html lang="en" className="">
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
         <ReactQueryProvider>
-          <Header />
-          <main className="flex flex-col px-4 items-center">
-            {children}
+          <div className="flex flex-col items-center min-h-screen">
+            <Header />
+            <main className="flex flex-col px-4 mx-auto w-full">
+              {children}
+            </main>
             <footer className="absolute bottom-4">
-              <span>&copy; 2025 All Rights Reserved</span>
+              <span className="">&copy; 2025 All Rights Reserved</span>
             </footer>
-          </main>
+          </div>
         </ReactQueryProvider>
         <ToastContainer hideProgressBar theme="light" />
       </body>

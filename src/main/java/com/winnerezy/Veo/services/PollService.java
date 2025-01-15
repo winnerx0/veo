@@ -26,12 +26,12 @@ public class PollService {
     @Autowired
     private OptionRepository optionRepository;
 
-    public List<Poll> getPolls() {
+    public Poll[] getPolls() {
         Poll[] polls = pollRepository.findByUser(userService.getCurrentUser());
         if(polls == null){
-            return new ArrayList<>();
+            return new Poll[0];
         }
-        return Arrays.stream(polls).toList();
+        return polls;
     }
 
     public Poll createPoll(PollDTO pollDTO) {
@@ -58,7 +58,7 @@ public class PollService {
             return createdPoll;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException();
+            throw new RuntimeException("Error creating poll");
         }
 
     }
