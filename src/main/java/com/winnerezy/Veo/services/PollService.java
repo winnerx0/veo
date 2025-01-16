@@ -1,19 +1,18 @@
 package com.winnerezy.Veo.services;
 
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.OptionRepository;
 import com.winnerezy.Veo.repositories.PollRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PollService {
@@ -31,6 +30,11 @@ public class PollService {
         if(polls == null){
             return new Poll[0];
         }
+        return polls;
+    }
+
+    public Poll getPoll(String pollId) {
+        Poll polls = pollRepository.findById(pollId).orElse(null);
         return polls;
     }
 

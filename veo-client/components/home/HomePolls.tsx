@@ -11,7 +11,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { LuGhost } from "react-icons/lu";
-
+import { formatDate } from "date-fns";
+import Link from "next/link";
 const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["polls"],
@@ -26,25 +27,21 @@ const HomePolls = () => {
   return (
     <div className="flex flex-col gap-2">
       {isLoading ? (
-        "Loading"
-      ) : data && data.length !== 0 ? 
-       (
-        data.map((poll, index) => (
-          <Card key={poll.id}>
-        <CardHeader>
-          <CardTitle>{poll.title}</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>{poll.ending}</p>
-        </CardFooter>
-      </Card>
+        <span className="flex items-center justify-center">Loading</span>
+      ) : data && data.length !== 0 ? (
+        data.map((poll: Poll, index) => (
+          <Link href={`/poll/${poll.id}`} key={poll.id}>
+            <Card>
+              <CardHeader>
+                <CardTitle>{poll.title}</CardTitle>
+              </CardHeader>
+              <CardFooter>
+                {/* <p>{formatDate(new Date(poll.ending), "")}</p> */}
+              </CardFooter>
+            </Card>
+          </Link>
         ))
-       )
-       : (
+      ) : (
         <div className="h-[400px] w-full flex items-center justify-center">
           {error ? (
             <span>{error.message}</span>

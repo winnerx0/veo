@@ -1,18 +1,18 @@
 package com.winnerezy.Veo.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RequestMapping( "api/v1/poll")
 @RestController
@@ -26,6 +26,17 @@ public class PollController {
         try {
             Poll[] polls = pollService.getPolls();
             return ResponseEntity.ok(polls);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @GetMapping("/{pollId}")
+    public ResponseEntity<Poll> getPoll(@PathVariable("pollId") String pollId) {
+        try {
+            Poll poll = pollService.getPoll(pollId);
+            return ResponseEntity.ok(poll);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).build();

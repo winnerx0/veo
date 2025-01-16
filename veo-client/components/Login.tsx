@@ -32,7 +32,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const res = await axios.post(
-      "https://veo-v54e.onrender.com/api/v1/auth/login",
+      "http://localhost:8080/api/v1/auth/login",
       data,
       {
         headers: {
