@@ -1,27 +1,25 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import {
   Card,
-  CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
-import { LuGhost } from "react-icons/lu";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { formatDate } from "date-fns";
 import Link from "next/link";
+import { LuGhost } from "react-icons/lu";
 const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["polls"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:8080/api/v1/poll/", {
+      const res = await axios.get("http://localhost:8080/api/v1/polls/", {
         withCredentials: true,
       });
       const ans = res.data;
-      return ans as any[];
+      return ans as Poll[];
     },
   });
   return (
@@ -29,14 +27,14 @@ const HomePolls = () => {
       {isLoading ? (
         <span className="flex items-center justify-center">Loading</span>
       ) : data && data.length !== 0 ? (
-        data.map((poll: Poll, index) => (
-          <Link href={`/poll/${poll.id}`} key={poll.id}>
+        data.map((poll) => (
+          <Link href={`/polls/${poll.id}`} key={poll.id}>
             <Card>
               <CardHeader>
                 <CardTitle>{poll.title}</CardTitle>
               </CardHeader>
               <CardFooter>
-                {/* <p>{formatDate(new Date(poll.ending), "")}</p> */}
+                <p>{formatDate(new Date(poll.ending), "LLL E yyyy")}</p>
               </CardFooter>
             </Card>
           </Link>

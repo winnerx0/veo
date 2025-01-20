@@ -14,7 +14,7 @@ import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
 import jakarta.validation.Valid;
 
-@RequestMapping( "api/v1/poll")
+@RequestMapping( "api/v1/polls")
 @RestController
 public class PollController {
 

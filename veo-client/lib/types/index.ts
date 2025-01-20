@@ -1,6 +1,7 @@
 declare type Poll = {
     id: string
     title: string;
+    ending: Date
     optons: Option[]
 }
 

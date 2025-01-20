@@ -21,7 +21,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const Create = () => {
+const CreatePoll = () => {
   const form = useForm<z.infer<typeof PollValidator>>({
     resolver: zodResolver(PollValidator),
     defaultValues: {
@@ -129,4 +129,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default CreatePoll;

@@ -7,16 +7,13 @@
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/PollDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/dto/PollDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/Option.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/Option.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/Poll.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/models/Poll.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/home/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/(main)/home/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/(main)/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/CreatePoll.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/create-poll/Create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/create-poll/Create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/poll/[pollId]/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/poll/create/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/create-poll/Create.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/lib/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/lib/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +106,7 @@
       <workItem from="1736346893174" duration="2520000" />
       <workItem from="1736410412350" duration="3502000" />
       <workItem from="1736578542472" duration="10613000" />
+      <workItem from="1737366486975" duration="2761000" />
     </task>
     <servers />
   </component>

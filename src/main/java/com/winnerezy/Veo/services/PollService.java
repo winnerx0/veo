@@ -34,8 +34,7 @@ public class PollService {
     }
 
     public Poll getPoll(String pollId) {
-        Poll polls = pollRepository.findById(pollId).orElse(null);
-        return polls;
+        return pollRepository.findById(pollId).orElse(null);
     }
 
     public Poll createPoll(PollDTO pollDTO) {
