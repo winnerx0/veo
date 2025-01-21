@@ -3,10 +3,12 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 
-const page = async ({ params: { pollId } }: { params: { pollId: string } }) => {
+const page = async ({ params }: { params: any }) => {
  
+  const { pollId }: { pollId: string } = await params
+
   return (
-    <section>
+    <section className='w-full h-full flex justify-center items-center'>
      <PollSection pollId={pollId}/> 
     </section>
   )

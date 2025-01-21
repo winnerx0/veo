@@ -2,7 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { formatDistance } from "date-fns";
+import { formatDistance, formatDistanceToNow, formatRelative } from "date-fns";
+import { Button } from "../ui/button";
 
 const PollSection = ({ pollId }: { pollId: string }) => {
   const { data, isLoading } = useQuery({
@@ -20,31 +21,14 @@ const PollSection = ({ pollId }: { pollId: string }) => {
       return poll as Poll;
     },
   });
-  //   const [ending, setEnding] = useState<Date>(data?.ending!);
-
-  //   useEffect(() => {
-  //     if (!data) {
-  //       return;
-  //     }
-  //     const interval = setInterval(() => {}, 1000);
-  //     return () => clearInterval(interval);
-  //   }, []);
-
-  const formatRelativeLocale = {
-    lastWeek: "'letzten' dddd 'um' LT",
-    yesterday: "'gestern um' LT",
-    today: "'heute um' LT",
-    tomorrow: "'morgen um' LT",
-    nextWeek: "dddd 'um' LT",
-    other: "L LT", // Difference: Add time to the date
-  };
 
   return (
-    <div>
-      {isLoading && !data ? (
+    <div className="w-full min-h-screen max-w-5xl flex flex-col">
+      {isLoading ? (
         <p>Loading</p>
       ) : (
-        <div>
+        data ? (
+          <>
           <div className="flex gap-2 justify-between items-center">
             <h2 className="font-bold text-3xl mt-4 ">{data?.title}</h2>
             <p>
@@ -54,7 +38,19 @@ const PollSection = ({ pollId }: { pollId: string }) => {
               </span>
             </p>
           </div>
-        </div>
+          <div className={`gap-2 text-center grid grid-cols-1 sm:grid-cols-3  items-center justify-between`}>
+            {
+              data.options && data.options.map(option => (
+                <div key={option.id}>
+              <h2>{ option.name }</h2>
+              <Button className="w-full">Vote</Button>
+            </div>
+              ))
+            }
+      
+          </div>
+        </>
+        ) : ""
       )}
     </div>
   );

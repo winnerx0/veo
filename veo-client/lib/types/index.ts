@@ -2,10 +2,11 @@ declare type Poll = {
     id: string
     title: string;
     ending: Date
-    optons: Option[]
+    options: Option[]
 }
 
 declare type Option = {
+    id: string
     name: string 
     votes: string[]
 }
