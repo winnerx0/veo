@@ -1,9 +1,13 @@
 package com.winnerezy.Veo.controllers;
 
+import com.winnerezy.Veo.dto.TokenDTO;
+import com.winnerezy.Veo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,57 +28,38 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "api/v1/auth", method = RequestMethod.POST)
 public class AuthenticationController {
-    
-    @Autowired
-    private AuthenticationService authenticationService;
 
-    @Autowired
-    private JwtService jwtService;
+    private final AuthenticationService authenticationService;
+
+    public AuthenticationController(AuthenticationService authenticationService){
+        this.authenticationService = authenticationService;
+    }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO registerUserDto, BindingResult result) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO registerUserDto) {
+        User registeredUser = authenticationService.register(registerUserDto);
 
-        if (result.hasErrors()) {
-            return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
-        }
-     try {
-         System.out.println("Registering user with details: " + registerUserDto);
-         User registeredUser = authenticationService.register(registerUserDto);
-
-         return ResponseEntity.ok(registeredUser);
-     } catch (Exception e) {
-         e.printStackTrace();
-         return ResponseEntity
-                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                 .body(e.getMessage());
-     }
+        return ResponseEntity.ok(registeredUser);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
        try {
-           User authenticatedUser = authenticationService.authenticate(loginUserDto);
+           User authenticatedUser = authenticationService.authenticate(loginUserDto, response);
 
-           System.out.println(authenticatedUser);
-
-           String jwtToken = jwtService.generateToken(authenticatedUser);
-
-           Cookie cookie = new Cookie("token", jwtToken);
-           cookie.setHttpOnly(true);
-           cookie.setPath("/");
-           cookie.setSecure(true);
-           cookie.setMaxAge((int) jwtService.getExpiration());
-
-           response.addCookie(cookie);
-
-           return ResponseEntity.ok(jwtToken);
+           return ResponseEntity.ok(authenticatedUser);
        } catch (BadCredentialsException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect email or password");
        } catch (RuntimeException ex) {
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
        } catch (Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Failed");
     }
+    }
+
+    @PostMapping("/verify-token")
+    public boolean verifyToken(@Valid @RequestBody TokenDTO tokenDTO){
+        return authenticationService.verifyToken(tokenDTO.getToken());
     }
 
 }

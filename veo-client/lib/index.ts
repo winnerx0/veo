@@ -12,3 +12,5 @@ export const features = [
     title: "Easy result compilation",
   },
 ];
+
+export const BACKEND_URL= "http://localhost:8080"

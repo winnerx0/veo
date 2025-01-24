@@ -5,7 +5,7 @@ export const PollValidator = z.object({
     .min(5, {
       message: "Title must be at least 5 charaters",
     })
-    .max(20),
+    .max(40),
   options: z
     .array(
       z.object({

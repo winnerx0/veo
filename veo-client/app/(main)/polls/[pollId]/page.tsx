@@ -1,4 +1,5 @@
 import PollSection from '@/components/poll/PollSection'
+import { BACKEND_URL } from '@/lib'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'

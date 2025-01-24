@@ -1,6 +1,5 @@
 import HomePolls from "@/components/home/HomePolls"
 import HomeTopBar from "@/components/home/HomeTopBar"
-import { Button } from "@/components/ui/button"
 
 const page = () => {
   return (

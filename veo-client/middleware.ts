@@ -1,10 +1,17 @@
+import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import { BACKEND_URL } from "./lib";
 
 export const middleware = async (req: NextRequest) => {
-  const protectedRoutes = ["/home", "/settings", "/poll"];
-
   const token = req.cookies.get("token")?.value;
-  if (!token && protectedRoutes.includes(req.nextUrl.pathname)) {
+
+  const res = await axios.post(`${BACKEND_URL}/api/v1/auth/verify-token`, {
+    token,
+  });
+
+  const isTokenValid: boolean = res.data;
+
+  if (!token ||!isTokenValid) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
@@ -12,7 +19,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
-  ],
+  matcher: ["/home", "/settings", "/polls/:path"],
 };

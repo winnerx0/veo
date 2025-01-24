@@ -1,7 +1,11 @@
 package com.winnerezy.Veo.controllers;
 
+import com.winnerezy.Veo.config.ApiErrorResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.services.PollService;
-import jakarta.validation.Valid;
+
+import java.util.Date;
 
 @RequestMapping( "api/v1/polls")
 @RestController
@@ -32,28 +37,23 @@ public class PollController {
     }
 
     @GetMapping("/{pollId}")
-    public ResponseEntity<Poll> getPoll(@PathVariable("pollId") String pollId) {
+    public ResponseEntity<?> getPoll(@PathVariable("pollId") String pollId) {
         try {
             Poll poll = pollService.getPoll(pollId);
+            if(poll.getEnding().before(new Date())){
+                return ResponseEntity.ok("Poll Ended");
+            }
             return ResponseEntity.ok(poll);
         } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
         }
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createPoll(@Valid @RequestBody PollDTO poll) {
-        try {
+    public ResponseEntity<Poll> createPoll(@Valid @RequestBody PollDTO pollDTO) {
 
-            Poll createdPoll = pollService.createPoll(poll);
-            return ResponseEntity.ok(createdPoll);
-        }
-        catch (RuntimeException e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-        catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
+        Poll createdPoll = pollService.createPoll(pollDTO);
+        return ResponseEntity.ok(createdPoll);
     }
 
     @PostMapping("/{id}/vote/{optionId}")

@@ -18,10 +18,15 @@ import { Input } from "@/components/ui/input";
 import { PollValidator } from "@/lib/validators/PollValidator";
 import { LuCirclePlus } from "react-icons/lu";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import { BACKEND_URL } from "@/lib";
+import { useState } from "react";
 
 const CreatePoll = () => {
+
+  const [date, setDate] = useState<string>(new Date().toISOString())
+
   const form = useForm<z.infer<typeof PollValidator>>({
     resolver: zodResolver(PollValidator),
     defaultValues: {
@@ -53,23 +58,26 @@ const CreatePoll = () => {
     mutationKey: ["poll"],
     mutationFn: async (body: PollValidator) => {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/poll/create",
-        body,
+        `${BACKEND_URL}/api/v1/polls/create`,
+        { ...body, ending: date },
         {
           withCredentials: true,
         }
       );
       const ans = res.data;
-      console.log(ans);
+    },
+    onSuccess(){
+      toast("Poll Created")
     },
     onError(error) {
-      console.log(error);
-      toast(error.message);
+      if (error instanceof AxiosError) {
+        toast(JSON.stringify(Object.values(error?.response?.data)));
+      }
     },
   });
 
-   function onSubmit(values: z.infer<typeof PollValidator>) {
-     mutate(values);
+  function onSubmit(values: z.infer<typeof PollValidator>) {
+    mutate(values);
   }
   return (
     <Form {...form}>
@@ -114,6 +122,7 @@ const CreatePoll = () => {
           ))}
         </div>
 
+<input type="date" value={date} onChange={(e) => setDate(e.target.value)}/>
         <Button
           type="button"
           onClick={() => append({ id: uuid(), name: "" })}

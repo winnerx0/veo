@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { BACKEND_URL } from "@/lib";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
@@ -34,7 +35,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     const res = await axios.post(
-      "http://localhost:8080/api/v1/auth/signup",
+      `${BACKEND_URL}/api/v1/auth/signup`,
       data,
       {
         headers: {
@@ -53,12 +54,10 @@ const Register = () => {
     mutationKey: ["register"],
     onError(error) {
       if(error instanceof AxiosError){
-          setError(error.response?.data)
-
+        setError(JSON.stringify(error.response?.data));
         }
     },
   })
-  console.log(error);
   return (
     <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl">
       <h1 className="text-3xl font-bold">Register To Veo</h1>

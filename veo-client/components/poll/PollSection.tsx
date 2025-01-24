@@ -1,34 +1,56 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { formatDistance, formatDistanceToNow, formatRelative } from "date-fns";
 import { Button } from "../ui/button";
+import { BACKEND_URL } from "@/lib";
+import { toast } from "react-toastify";
+import { LuSunMoon } from "react-icons/lu";
 
 const PollSection = ({ pollId }: { pollId: string }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["poll"],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:8080/api/v1/polls/${pollId}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.get(`${BACKEND_URL}/api/v1/polls/${pollId}`, {
+        withCredentials: true,
+      });
 
-      const poll = res.data;
+      const ans = res.data;
 
-      return poll as Poll;
+      return ans as Poll | string;
     },
   });
 
+  const handleVote = async (id: string) => {
+    try {
+      const res = await axios.post(
+        `${BACKEND_URL}/api/v1/polls/${pollId}/vote/${id}`,null, {
+          withCredentials: true
+        }
+      );
+
+      const ans = res.data;
+
+      toast(ans)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast(JSON.stringify(error.response?.data));
+      }
+    }
+  };
   return (
     <div className="w-full min-h-screen max-w-5xl flex flex-col">
       {isLoading ? (
-        <p>Loading</p>
-      ) : (
-        data ? (
-          <>
+        <div className="flex h-screen items-center justify-center">
+          <p>Loading</p>
+        </div>
+      ) : typeof data === "string" ? 
+        <div className="flex items-center flex-col">
+          <LuSunMoon size={40} className="text-primary"/>
+          <h2 className="font-bold text-3xl">{data}</h2>
+        </div> :
+        <>
           <div className="flex gap-2 justify-between items-center">
             <h2 className="font-bold text-3xl mt-4 ">{data?.title}</h2>
             <p>
@@ -38,20 +60,23 @@ const PollSection = ({ pollId }: { pollId: string }) => {
               </span>
             </p>
           </div>
-          <div className={`gap-2 text-center grid grid-cols-1 sm:grid-cols-3  items-center justify-between`}>
-            {
-              data.options && data.options.map(option => (
+          <div
+            className={`gap-2 text-center grid grid-cols-1 sm:grid-cols-3 mt-24`}
+          >
+            {data?.options &&
+              data.options.map((option) => (
                 <div key={option.id}>
-              <h2>{ option.name }</h2>
-              <Button className="w-full">Vote</Button>
-            </div>
-              ))
-            }
-      
+                  <Button
+                    className="w-full h-10"
+                    onClick={() => handleVote(option.id)}
+                  >
+                    Vote {option.name}
+                  </Button>
+                </div>
+              ))}
           </div>
         </>
-        ) : ""
-      )}
+    }
     </div>
   );
 };

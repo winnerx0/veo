@@ -1,15 +1,15 @@
 package com.winnerezy.Veo.config;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class ApiErrorResponse {
 
-    private int code;
     private String message;
 
-    public ApiErrorResponse(int code, String message) {
-        this.code = code;
+    public ApiErrorResponse(String message) {
         this.message = message;
     }
 }

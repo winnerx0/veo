@@ -38,32 +38,25 @@ public class PollService {
     }
 
     public Poll createPoll(PollDTO pollDTO) {
-        try {
-            Poll poll = new Poll();
-            poll.setTitle(pollDTO.getTitle());
-            poll.setUser(userService.getCurrentUser());
-            poll.setEnding(pollDTO.getEnding());
 
-            Poll createdPoll = pollRepository.save(poll);
+        Poll poll = new Poll();
+        poll.setTitle(pollDTO.getTitle());
+        poll.setUser(userService.getCurrentUser());
+        poll.setEnding(pollDTO.getEnding());
 
-            System.out.println("Saving poll: " + createdPoll);
+        Poll createdPoll = pollRepository.save(poll);
 
-            List<Option> options = pollDTO.getOptions();
+        List<Option> options = pollDTO.getOptions();
 
-            options.forEach(option -> {
-                Option newOption = new Option();
-                newOption.setName(option.getName());
-                newOption.setPoll(createdPoll);
-                System.out.println(newOption);
-                optionRepository.save(newOption);
-            });
+        options.forEach(option -> {
+            Option newOption = new Option();
+            newOption.setName(option.getName());
+            newOption.setPoll(createdPoll);
+            System.out.println(newOption);
+            optionRepository.save(newOption);
+        });
 
-            return createdPoll;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error creating poll");
-        }
-
+        return createdPoll;
     }
 
     public String votePoll(String id, String optionId) {

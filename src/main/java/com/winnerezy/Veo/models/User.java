@@ -1,12 +1,18 @@
 package com.winnerezy.Veo.models;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
@@ -21,17 +27,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "username", nullable = false)
     private String username;
 
     @Column(name = "joinedAt")
-    private Date joinedAt;
+    private LocalDate joinedAt = LocalDate.now();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Poll> polls;

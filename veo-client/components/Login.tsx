@@ -8,6 +8,7 @@ import axios, { AxiosError } from "axios";
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { BACKEND_URL } from "@/lib";
 
 interface Login {
   email: string;
@@ -32,7 +33,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const res = await axios.post(
-      "http://localhost:8080/api/v1/auth/login",
+     `${BACKEND_URL}/api/v1/auth/login`,
       data,
       {
         headers: {
@@ -50,7 +51,7 @@ const Login = () => {
     mutationKey: ["login"],
     onError(error) {
       if (error instanceof AxiosError) {
-        setError(error.response?.data);
+        setError(JSON.stringify(error.response?.data));
       }
     },
   });
