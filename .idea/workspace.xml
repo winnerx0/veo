@@ -5,15 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/poll/[pollId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/poll/create/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/create-poll/Create.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/lib/types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/VeoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/VeoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApiErrorResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApiErrorResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApiExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApiExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApplicationConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/ApplicationConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/config/SecurityConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/LoginDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/LoginDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/PollDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/PollDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/RegisterDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/dto/RegisterDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/Option.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/Option.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/Poll.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/Poll.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/OptionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/OptionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/PollRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/PollRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/repositories/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/AuthenticationService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/JwtService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/JwtService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/winnerezy/Veo/services/UserService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,24 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.VeoApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.VeoApplication.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.VeoApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/winner/Documents/projects/Veo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="VeoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Veo" />
@@ -80,14 +95,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -106,7 +113,7 @@
       <workItem from="1736346893174" duration="2520000" />
       <workItem from="1736410412350" duration="3502000" />
       <workItem from="1736578542472" duration="10613000" />
-      <workItem from="1737366486975" duration="2761000" />
+      <workItem from="1737366486975" duration="3683000" />
     </task>
     <servers />
   </component>

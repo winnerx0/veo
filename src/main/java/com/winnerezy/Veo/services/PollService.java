@@ -94,7 +94,7 @@ public class PollService {
         }
     }
 
-        public String deletePoll(String id) {
+    public String deletePoll(String id) {
      try {
          Poll poll = pollRepository.findById(id).orElse(null);
 

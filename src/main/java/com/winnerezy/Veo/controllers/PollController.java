@@ -27,7 +27,6 @@ public class PollController {
             Poll[] polls = pollService.getPolls();
             return ResponseEntity.ok(polls);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
     }
@@ -38,7 +37,6 @@ public class PollController {
             Poll poll = pollService.getPoll(pollId);
             return ResponseEntity.ok(poll);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(500).build();
         }
     }
@@ -51,7 +49,6 @@ public class PollController {
             return ResponseEntity.ok(createdPoll);
         }
         catch (RuntimeException e) {
-            e.printStackTrace();
             return ResponseEntity.status(500).body(e.getMessage());
         }
         catch (Exception e) {
