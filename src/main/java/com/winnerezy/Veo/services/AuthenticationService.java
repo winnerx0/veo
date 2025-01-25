@@ -73,7 +73,7 @@ public class AuthenticationService {
         .httpOnly(true)
         .path("/")
         .secure(true)
-        .sameSite("Lax")
+        .sameSite("None")
         .maxAge((int) jwtService.getExpiration())
         .build();
 
