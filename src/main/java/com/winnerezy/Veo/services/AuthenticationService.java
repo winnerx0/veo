@@ -3,6 +3,8 @@ package com.winnerezy.Veo.services;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,7 +16,6 @@ import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -52,7 +53,7 @@ public class AuthenticationService {
 
         User user = new User();
         user.setUsername(registerDTO.getUsername());
-        user.setEmail(registerDTO.getEmail());
+        user.setEmail(registerDTO.getEmail()); 
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setJoinedAt(LocalDate.now());
 
@@ -68,13 +69,15 @@ public class AuthenticationService {
 
         String jwtToken = jwtService.generateToken(user);
 
-        Cookie cookie = new Cookie("token", jwtToken);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setSecure(true);
-        cookie.setMaxAge((int) jwtService.getExpiration());
+        ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
+        .httpOnly(true)
+        .path("/")
+        .secure(true)
+        .sameSite("Lax")
+        .maxAge((int) jwtService.getExpiration())
+        .build();
 
-        response.addCookie(cookie);
+        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
         return user;
     }
 
