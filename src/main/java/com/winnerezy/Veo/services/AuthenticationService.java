@@ -22,9 +22,9 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthenticationService {
 
     private final UserRepository userRepository;
-    
+
     private final PasswordEncoder passwordEncoder;
-    
+
     private final AuthenticationManager authenticationManager;
 
     private final JwtService jwtService;
@@ -32,12 +32,11 @@ public class AuthenticationService {
     private final UserDetailsService userDetailsService;
 
     public AuthenticationService(
-        UserRepository userRepository,
-        AuthenticationManager authenticationManager,
-        PasswordEncoder passwordEncoder,
-        JwtService jwtService,
-        UserDetailsService userDetailsService
-    ) {
+            UserRepository userRepository,
+            AuthenticationManager authenticationManager,
+            PasswordEncoder passwordEncoder,
+            JwtService jwtService,
+            UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -47,47 +46,49 @@ public class AuthenticationService {
 
     public User register(RegisterDTO registerDTO) {
 
-        if(userRepository.existsByEmail(registerDTO.getEmail())){
+        if (userRepository.existsByEmail(registerDTO.getEmail())) {
             throw new IllegalArgumentException("Email already exists");
         }
 
         User user = new User();
         user.setUsername(registerDTO.getUsername());
-        user.setEmail(registerDTO.getEmail()); 
+        user.setEmail(registerDTO.getEmail());
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setJoinedAt(LocalDate.now());
 
         return userRepository.save(user);
     }
 
-    public User authenticate(LoginDTO loginDTO, HttpServletResponse response){
+    public User authenticate(LoginDTO loginDTO, HttpServletResponse response) {
 
         User user = userRepository.findByEmail(loginDTO.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+        authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
         String jwtToken = jwtService.generateToken(user);
 
         ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
-        .httpOnly(true)
-        .path("/")
-        .secure(true)
-        .sameSite("None")
-        .maxAge((int) jwtService.getExpiration())
-        .build();
+                .httpOnly(true)
+                .path("/")
+                .secure(true)
+                .sameSite("none")
+                .maxAge((int) jwtService.getExpiration())
+                .build();
 
-        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; Partitioned");
+
         return user;
     }
 
-    public boolean verifyToken(String token){
+    public boolean verifyToken(String token) {
         Optional<User> user = userRepository.findByEmail(jwtService.extractUsername(token));
 
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             return false;
         }
         return jwtService.isTokenValid(token, userDetailsService.loadUserByUsername(jwtService.extractUsername(token)));
     }
-    
+
 }
