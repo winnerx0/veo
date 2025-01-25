@@ -72,7 +72,7 @@ public class AuthenticationService {
         ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
         .httpOnly(true)
         .path("/")
-        .secure(false)
+        .secure(true)
         .sameSite("None")
         .maxAge((int) jwtService.getExpiration())
         .build();
