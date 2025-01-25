@@ -31,4 +31,4 @@ build/
 .env
 .vercel
 
-target
+target/
