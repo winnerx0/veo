@@ -74,7 +74,7 @@ public class AuthenticationService {
         .path("/")
         .secure(true)
         .sameSite("None")
-        .maxAge((int) jwtService.getExpiration())
+        .maxAge(jwtService.getExpiration())
         .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; Partitioned;");
