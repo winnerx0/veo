@@ -6,6 +6,7 @@ export const middleware = async (req: NextRequest) => {
   const token = req.cookies.get("token")?.value;
 
   const res = await fetch(`${BACKEND_URL}/api/v1/auth/verify-token`, {
+    method: "POST",
     body: JSON.stringify({
       token,
     }),
