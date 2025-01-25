@@ -1,14 +1,8 @@
 package com.winnerezy.Veo.controllers;
 
-import com.winnerezy.Veo.dto.TokenDTO;
-import com.winnerezy.Veo.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.winnerezy.Veo.dto.LoginDTO;
 import com.winnerezy.Veo.dto.RegisterDTO;
+import com.winnerezy.Veo.dto.TokenDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.services.AuthenticationService;
-import com.winnerezy.Veo.services.JwtService;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
