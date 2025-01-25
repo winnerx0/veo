@@ -77,7 +77,7 @@ public class AuthenticationService {
         .maxAge((int) jwtService.getExpiration())
         .build();
 
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; Partitioned;");
         return user;
     }
 
