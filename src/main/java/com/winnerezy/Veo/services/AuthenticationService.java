@@ -74,7 +74,7 @@ public class AuthenticationService {
         cookie.setPath("/");
         cookie.setSecure(true);
         cookie.setMaxAge((int) jwtService.getExpiration());
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; SameSite=None");
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.getAttributes() + "; SameSite=None");
         return user;
     }
 
