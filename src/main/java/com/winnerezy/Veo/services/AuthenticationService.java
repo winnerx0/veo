@@ -1,27 +1,21 @@
 package com.winnerezy.Veo.services;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
-import com.winnerezy.Veo.dto.LoginDTO;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.catalina.filters.ExpiresFilter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.winnerezy.Veo.dto.LoginDTO;
 import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class AuthenticationService {

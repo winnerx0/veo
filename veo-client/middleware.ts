@@ -5,13 +5,19 @@ import { BACKEND_URL } from "./lib";
 export const middleware = async (req: NextRequest) => {
   const token = req.cookies.get("token")?.value;
 
-  const res = await axios.post(`${BACKEND_URL}/api/v1/auth/verify-token`, {
-    token,
+  const res = await fetch(`${BACKEND_URL}/api/v1/auth/verify-token`, {
+    body: JSON.stringify({
+      token,
+    }),
+
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
-  const isTokenValid: boolean = res.data;
+  const isTokenValid: boolean = await res.json();
 
-  if (!token ||!isTokenValid) {
+  if (!token || !isTokenValid) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
@@ -19,5 +25,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: ["/home", "/settings", "/polls/:path"],
+  matcher: ["/home", "/settings", "/polls/:path*"],
 };
