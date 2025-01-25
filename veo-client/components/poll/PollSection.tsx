@@ -40,13 +40,13 @@ const PollSection = ({ pollId }: { pollId: string }) => {
     }
   };
   return (
-    <div className="w-full min-h-screen max-w-5xl flex flex-col">
+    <div className="w-full max-w-5xl flex flex-col">
       {isLoading ? (
-        <div className="flex h-screen items-center justify-center">
+        <div className="flex h-[calc(100vh-48px)] items-center justify-center">
           <p>Loading</p>
         </div>
       ) : typeof data === "string" ? 
-        <div className="flex items-center flex-col">
+        <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
           <LuSunMoon size={40} className="text-primary"/>
           <h2 className="font-bold text-3xl">{data}</h2>
         </div> :
