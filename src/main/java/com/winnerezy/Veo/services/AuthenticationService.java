@@ -3,6 +3,7 @@ package com.winnerezy.Veo.services;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -73,8 +74,7 @@ public class AuthenticationService {
         cookie.setPath("/");
         cookie.setSecure(true);
         cookie.setMaxAge((int) jwtService.getExpiration());
-
-        response.addCookie(cookie);
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; sameSite=None");
         return user;
     }
 
