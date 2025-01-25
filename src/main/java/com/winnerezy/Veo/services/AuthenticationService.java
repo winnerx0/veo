@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +16,6 @@ import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -69,12 +69,15 @@ public class AuthenticationService {
 
         String jwtToken = jwtService.generateToken(user);
 
-        Cookie cookie = new Cookie("token", jwtToken);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setSecure(true);
-        cookie.setMaxAge((int) jwtService.getExpiration());
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.getAttributes() + "; SameSite=None");
+        ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
+        .httpOnly(true)
+        .path("/")
+        .secure(true)
+        .sameSite("None")
+        .maxAge((int) jwtService.getExpiration())
+        .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
         return user;
     }
 
