@@ -73,11 +73,11 @@ public class AuthenticationService {
                 .httpOnly(true)
                 .path("/")
                 .secure(true)
-                .sameSite("none")
+                .sameSite("None")
                 .maxAge((int) jwtService.getExpiration())
                 .build();
 
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString() + "; Partitioned");
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
         return user;
     }
