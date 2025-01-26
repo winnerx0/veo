@@ -1,6 +1,8 @@
 package com.winnerezy.Veo.controllers;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,6 @@ import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
@@ -47,13 +48,15 @@ public class AuthenticationController {
 
             String jwtToken = jwtService.generateToken(authenticatedUser);
 
-            Cookie cookie = new Cookie("token", jwtToken);
-            cookie.setHttpOnly(false);
-            cookie.setPath("/");
-            cookie.setSecure(true);
-            cookie.setMaxAge((int) jwtService.getExpiration());
+            ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
+                    .httpOnly(true)
+                    .path("/")
+                    .secure(true)
+                    .sameSite("None")
+                    .maxAge(jwtService.getExpiration())
+                    .build();
 
-            response.addCookie(cookie);
+            response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
             return ResponseEntity.ok(authenticatedUser);
         } catch (BadCredentialsException ex) {

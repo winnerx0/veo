@@ -3,6 +3,8 @@ package com.winnerezy.Veo.services;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +15,8 @@ import com.winnerezy.Veo.dto.LoginDTO;
 import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class AuthenticationService {
