@@ -1,11 +1,6 @@
 package com.winnerezy.Veo.controllers;
 
-import com.winnerezy.Veo.responses.LoginResponse;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,13 +13,14 @@ import com.winnerezy.Veo.dto.LoginDTO;
 import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.dto.TokenDTO;
 import com.winnerezy.Veo.models.User;
+import com.winnerezy.Veo.responses.LoginResponse;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-
-import java.util.Date;
 
 @RestController
 @RequestMapping(value = "api/v1/auth", method = RequestMethod.POST)
@@ -53,18 +49,18 @@ public class AuthenticationController {
 
             String token = jwtService.generateToken(authenticatedUser);
 
-            ResponseCookie cookie = ResponseCookie.from("jwt", token)
-                    .path("/")
-                    .maxAge((int) (jwtService.getExpiration() / 1000))
-                    .httpOnly(true)
-                    .secure(true)
-                    .sameSite("None")
-                    .domain("veo-production.up.railway.app")
-                    .build();
+            Cookie cookie = new Cookie("jwt", token);
+                    // .path("/")
+                    // .maxAge((int) (jwtService.getExpiration() / 1000))
+                    // .httpOnly(true)
+                    // .secure(true)
+                    // .sameSite("None")
+                    // .domain("veo-production.up.railway.app")
+                    // .build();
 //            if (request.isSecure()) {
 //
 //            }
-            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+            response.addCookie(cookie);
 
 
             LoginResponse loginResponse = new LoginResponse(token, jwtService.getExpiration());

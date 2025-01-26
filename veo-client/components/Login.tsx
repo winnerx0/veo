@@ -9,6 +9,7 @@ import { ChangeEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { BACKEND_URL } from "@/lib";
+import { api } from "@/lib/api";
 
 interface Login {
   email: string;

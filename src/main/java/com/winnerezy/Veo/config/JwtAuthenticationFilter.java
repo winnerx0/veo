@@ -52,14 +52,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
            return;
        }
 
-//        String token = response.getHeader("Authorization");
-//
-//        if (token == null || !token.startsWith("Bearer ")) {
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
-//
-//        String jwt = token.substring(7);
+    //    String token = response.getHeader("Authorization");
+
+    //    if (token == null || !token.startsWith("Bearer ")) {
+    //        filterChain.doFilter(request, response);
+    //        return;
+    //    }
+
+    //    String jwt = token.substring(7);
 
         try {
             final String userEmail = jwtService.extractUsername(jwt);
