@@ -10,7 +10,7 @@ export const middleware = async (req: NextRequest) => {
     body: JSON.stringify({
       token,
     }),
-
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
