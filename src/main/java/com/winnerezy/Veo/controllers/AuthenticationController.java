@@ -59,7 +59,7 @@ public class AuthenticationController {
                     .httpOnly(true)
                     .secure(true)
                     .sameSite("None")
-                    .domain("veo-v54e.onrender.com")
+                    .domain("veo-production.up.railway.app")
                     .build();
 //            if (request.isSecure()) {
 //
