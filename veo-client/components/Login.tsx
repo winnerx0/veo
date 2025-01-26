@@ -36,6 +36,10 @@ const Login = () => {
      `${BACKEND_URL}/api/v1/auth/login`,
       data,
       {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
         withCredentials: true,
       }
     );

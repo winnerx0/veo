@@ -1,5 +1,8 @@
 package com.winnerezy.Veo.controllers;
 
+import com.winnerezy.Veo.responses.LoginResponse;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -20,6 +23,8 @@ import com.winnerezy.Veo.services.JwtService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping(value = "api/v1/auth", method = RequestMethod.POST)
@@ -42,23 +47,24 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletRequest request, HttpServletResponse response) {
         try {
             User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
-            String jwtToken = jwtService.generateToken(authenticatedUser);
+            String token = jwtService.generateToken(authenticatedUser);
 
-            ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
-                    .httpOnly(true)
-                    .path("/")
-                    .secure(true)
-                    .sameSite("None")
-                    .maxAge(jwtService.getExpiration())
-                    .build();
+            Cookie cookie = new Cookie("jwt", token);
+            cookie.setPath("/");
+            cookie.setMaxAge((int) (jwtService.getExpiration() / 1000));
+            cookie.setHttpOnly(true);
+            if (request.isSecure()) {
+                cookie.setSecure(true);
+            }
+            response.addCookie(cookie);
 
-            response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
-            return ResponseEntity.ok(authenticatedUser);
+            LoginResponse loginResponse = new LoginResponse(token, jwtService.getExpiration());
+            return ResponseEntity.ok(loginResponse);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect email or password");
         } catch (RuntimeException ex) {

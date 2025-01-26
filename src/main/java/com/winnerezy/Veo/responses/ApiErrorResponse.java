@@ -1,4 +1,4 @@
-package com.winnerezy.Veo.config;
+package com.winnerezy.Veo.responses;
 
 import lombok.Getter;
 import lombok.ToString;

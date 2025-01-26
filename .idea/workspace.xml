@@ -5,25 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes">
-      <change afterPath="$PROJECT_DIR$/veo-client/components/ui/calendar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/veo-client/components/ui/popover.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/responses/LoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/responses/ApiErrorResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/JwtService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Veo-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Veo-0.0.1-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Veo-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Veo-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2025-01-07T09-20-10_701-jvmRun1-commands.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/2025-01-07T09-20-10_701-jvmRun1-events.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.winnerezy.Veo.VeoApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.winnerezy.Veo.VeoApplicationTests.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/surefire-reports/com.winnerezy.Veo.VeoApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/com.winnerezy.Veo.VeoApplicationTests.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/winnerezy/Veo/VeoApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/winnerezy/Veo/VeoApplicationTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/bun.lockb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/poll/PollSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/poll/PollSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +93,14 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="Veo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="VeoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="Veo" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.winnerezy.Veo.VeoApplication" />
