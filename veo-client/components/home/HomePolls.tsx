@@ -12,7 +12,7 @@ const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["polls"],
     queryFn: async () => {
-      const res = await api.get(`${BACKEND_URL}/api/v1/polls/`, {
+      const res = await axios.get(`${BACKEND_URL}/api/v1/polls/`, {
         withCredentials: true,
       });
       const ans = res.data;

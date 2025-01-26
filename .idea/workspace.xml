@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/responses/LoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiErrorResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/responses/ApiErrorResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
