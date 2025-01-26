@@ -17,8 +17,7 @@ public class SecurityConfiguration {
 
     public SecurityConfiguration(
             JwtAuthenticationFilter jwtAuthenticationFilter,
-            AuthenticationProvider authenticationProvider
-    ) {
+            AuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
@@ -26,34 +25,35 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-             
-          
+                .csrf()
+                .disable()
+                .cors()
+                .disable()
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("api/v1/auth/**").permitAll()  // Explicitly permit both endpoints
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers("api/v1/auth/**").permitAll() // Explicitly permit both endpoints
+                        .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authenticationProvider(authenticationProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf()
-                .disable()
-                .cors();
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     // @Bean
     // public CorsConfigurationSource corsConfigurationSource() {
-    //     CorsConfiguration configuration = new CorsConfiguration();
-    //     configuration.setAllowedOrigins(List.of("https://veo-six.vercel.app", "http://localhost:3000"));
-    //     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
-    //     configuration.setAllowedHeaders(List.of("*"));
-    //     configuration.setExposedHeaders(List.of("Set-Cookie"));
-    //     configuration.setAllowCredentials(true);
-    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     source.registerCorsConfiguration("/**", configuration);
-    //     return source;
+    // CorsConfiguration configuration = new CorsConfiguration();
+    // configuration.setAllowedOrigins(List.of("https://veo-six.vercel.app",
+    // "http://localhost:3000"));
+    // configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+    // configuration.setAllowedHeaders(List.of("*"));
+    // configuration.setExposedHeaders(List.of("Set-Cookie"));
+    // configuration.setAllowCredentials(true);
+    // UrlBasedCorsConfigurationSource source = new
+    // UrlBasedCorsConfigurationSource();
+    // source.registerCorsConfiguration("/**", configuration);
+    // return source;
     // }
 }
