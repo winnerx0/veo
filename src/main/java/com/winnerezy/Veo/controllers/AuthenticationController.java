@@ -53,14 +53,17 @@ public class AuthenticationController {
 
             String token = jwtService.generateToken(authenticatedUser);
 
-            Cookie cookie = new Cookie("jwt", token);
-            cookie.setPath("/");
-            cookie.setMaxAge((int) (jwtService.getExpiration() / 1000));
-            cookie.setHttpOnly(true);
-            if (request.isSecure()) {
-                cookie.setSecure(true);
-            }
-            response.addCookie(cookie);
+            ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                    .path("/")
+                    .maxAge((int) (jwtService.getExpiration() / 1000))
+                    .httpOnly(true)
+                    .secure(true)
+                    .sameSite("None")
+                            .build();
+//            if (request.isSecure()) {
+//
+//            }
+            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 
             LoginResponse loginResponse = new LoginResponse(token, jwtService.getExpiration());

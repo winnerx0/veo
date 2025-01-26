@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/AuthenticationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
