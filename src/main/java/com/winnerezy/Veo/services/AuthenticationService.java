@@ -70,7 +70,7 @@ public class AuthenticationService {
         String jwtToken = jwtService.generateToken(user);
 
         ResponseCookie cookie = ResponseCookie.from("token", jwtToken)
-        .httpOnly(true)
+        .httpOnly(false)
         .path("/")
         .secure(true)
         .sameSite("None")
