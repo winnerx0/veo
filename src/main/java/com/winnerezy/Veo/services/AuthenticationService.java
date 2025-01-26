@@ -74,7 +74,6 @@ public class AuthenticationService {
         .path("/")
         .secure(true)
         .sameSite("None")
-        .domain("veo-six.vercel.app")
         .maxAge(jwtService.getExpiration())
         .build();
 
