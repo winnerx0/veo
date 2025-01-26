@@ -14,9 +14,6 @@ import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.repositories.UserRepository;
 
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
-
 @Service
 public class AuthenticationService {
 
@@ -59,22 +56,13 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
-    public User authenticate(LoginDTO loginDTO, HttpServletResponse response){
+    public User authenticate(LoginDTO loginDTO){
 
         User user = userRepository.findByEmail(loginDTO.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
-        String jwtToken = jwtService.generateToken(user);
-
-        Cookie cookie = new Cookie("token", jwtToken);
-        cookie.setHttpOnly(false);
-        cookie.setPath("/");
-        cookie.setSecure(true);
-        cookie.setMaxAge((int) jwtService.getExpiration());
-
-        response.addCookie(cookie);
         return user;
     }
 

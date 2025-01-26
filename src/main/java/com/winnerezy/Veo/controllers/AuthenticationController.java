@@ -14,7 +14,9 @@ import com.winnerezy.Veo.dto.RegisterDTO;
 import com.winnerezy.Veo.dto.TokenDTO;
 import com.winnerezy.Veo.models.User;
 import com.winnerezy.Veo.services.AuthenticationService;
+import com.winnerezy.Veo.services.JwtService;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
@@ -24,8 +26,11 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    public AuthenticationController(AuthenticationService authenticationService){
+    private final JwtService jwtService;
+
+    public AuthenticationController(AuthenticationService authenticationService, JwtService jwtService) {
         this.authenticationService = authenticationService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/signup")
@@ -37,21 +42,31 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletResponse response) {
-       try {
-           User authenticatedUser = authenticationService.authenticate(loginUserDto, response);
+        try {
+            User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
-           return ResponseEntity.ok(authenticatedUser);
-       } catch (BadCredentialsException ex) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect email or password");
-       } catch (RuntimeException ex) {
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-       } catch (Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Failed");
-    }
+            String jwtToken = jwtService.generateToken(authenticatedUser);
+
+            Cookie cookie = new Cookie("token", jwtToken);
+            cookie.setHttpOnly(false);
+            cookie.setPath("/");
+            cookie.setSecure(true);
+            cookie.setMaxAge((int) jwtService.getExpiration());
+
+            response.addCookie(cookie);
+
+            return ResponseEntity.ok(authenticatedUser);
+        } catch (BadCredentialsException ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect email or password");
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Failed");
+        }
     }
 
     @PostMapping("/verify-token")
-    public boolean verifyToken(@Valid @RequestBody TokenDTO tokenDTO){
+    public boolean verifyToken(@Valid @RequestBody TokenDTO tokenDTO) {
         return authenticationService.verifyToken(tokenDTO.getToken());
     }
 
