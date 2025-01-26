@@ -5,6 +5,10 @@ import { BACKEND_URL } from "./lib";
 export const middleware = async (req: NextRequest) => {
   const token = req.cookies.get("jwt")?.value;
 
+  if (!token) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
   const res = await fetch(`${BACKEND_URL}/api/v1/auth/verify-token`, {
     method: "POST",
     body: JSON.stringify({
@@ -18,7 +22,7 @@ export const middleware = async (req: NextRequest) => {
 
   const isTokenValid: boolean = await res.json();
 
-  if (!token || !isTokenValid) {
+  if (!isTokenValid) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
