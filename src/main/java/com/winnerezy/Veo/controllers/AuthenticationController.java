@@ -50,16 +50,11 @@ public class AuthenticationController {
             String token = jwtService.generateToken(authenticatedUser);
 
             Cookie cookie = new Cookie("jwt", token);
-                    // .path("/")
-                    // .maxAge((int) (jwtService.getExpiration() / 1000))
-                    // .httpOnly(true)
-                    // .secure(true)
-                    // .sameSite("None")
-                    // .domain("veo-production.up.railway.app")
-                    // .build();
-//            if (request.isSecure()) {
-//
-//            }
+            cookie.setHttpOnly(true);
+            cookie.setSecure(true); 
+            cookie.setPath("/");
+            cookie.setMaxAge((int) jwtService.getExpiration());
+            cookie.setAttribute("SameSite", "None");
             response.addCookie(cookie);
 
 
