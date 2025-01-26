@@ -53,7 +53,7 @@ public class AuthenticationController {
             cookie.setHttpOnly(true);
             cookie.setSecure(true); 
             cookie.setPath("/");
-            cookie.setDomain(".vercel.app");
+            cookie.setDomain("veo-six.vercel.app");
             cookie.setMaxAge((int) jwtService.getExpiration());
             cookie.setAttribute("SameSite", "None");
             response.addCookie(cookie);
