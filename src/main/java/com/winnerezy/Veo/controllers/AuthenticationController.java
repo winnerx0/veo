@@ -59,7 +59,7 @@ public class AuthenticationController {
                     .httpOnly(true)
                     .secure(true)
                     .sameSite("None")
-                    .domain("veo-six.vercel.app")
+                    .domain("veo-v54e.onrender.com")
                     .build();
 //            if (request.isSecure()) {
 //
