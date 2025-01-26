@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(auth)/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/app/(auth)/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/components/Login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/lib/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/lib/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/veo-client/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/veo-client/middleware.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

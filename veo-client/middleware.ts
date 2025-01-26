@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { BACKEND_URL } from "./lib";
 
 export const middleware = async (req: NextRequest) => {
-  const token = req.cookies.get("token")?.value;
+  const token = req.cookies.get("jwt")?.value;
 
   const res = await fetch(`${BACKEND_URL}/api/v1/auth/verify-token`, {
     method: "POST",
