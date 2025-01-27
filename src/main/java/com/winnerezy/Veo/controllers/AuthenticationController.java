@@ -53,7 +53,7 @@ public class AuthenticationController {
             cookie.setHttpOnly(true);
             cookie.setSecure(true); 
             cookie.setPath("/");
-            cookie.setDomain("veo-production.up.railway.app");
+            cookie.setDomain("onrender.com");
             cookie.setMaxAge((int) jwtService.getExpiration() / 1000);
             cookie.setAttribute("SameSite", "None");
             response.addCookie(cookie);
