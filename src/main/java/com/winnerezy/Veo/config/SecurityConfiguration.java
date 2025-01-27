@@ -47,7 +47,7 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://veo-six.vercel.app", "http://localhost:3000")); 
+        configuration.setAllowedOrigins(List.of("https://veo-six.vercel.app", "http://localhost:3000", "https://veo-2.onrender.com")); 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setExposedHeaders(List.of("Set-Cookie")); 
