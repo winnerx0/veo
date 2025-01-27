@@ -12,8 +12,7 @@ COPY veo-client/ ./
 RUN npm install --force
 RUN npm run build
 
-# Stage 3: Final Image
-FROM openjdk:21-jdk
+FROM eclipse-temurin:21-jdk AS final
 
 WORKDIR /app
 
@@ -24,7 +23,7 @@ COPY --from=build /app/${JAR_FILE} app.jar
 # Copy Next.js build output
 COPY --from=nextjs-builder /veo-client/ /nextjs/
 
-# Install Node.js (manually add it to the image)
+# Install Node.js
 RUN apt-get update && apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs
