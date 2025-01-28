@@ -4,70 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApiExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/WebConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/controllers/PollController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/repositories/OptionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/repositories/OptionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/PollService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(auth)/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(auth)/login/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(auth)/register/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/home/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/polls/[pollId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/polls/create/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/(main)/settings/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/globals.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/not-found.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/app/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/bun.lockb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Header.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Login.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ReactQueryProvider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/Register.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/hero/HeroFeature.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/hero/HeroSection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/hero/HeroTitle.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomePolls.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/home/HomeTopBar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/poll/PollSection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/poll/create-poll/CreatePoll.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/calendar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/card.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/form.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/input.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/label.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/popover.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/components/ui/rainbow-button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/api.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/types/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/utils.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/lib/validators/PollValidator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/middleware.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/next.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/postcss.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/public/file.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/public/globe.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/public/next.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/public/vercel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/public/window.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/tailwind.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/veo-client/tsconfig.json" beforeDir="false" />
-    </list>
+    <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="Some minor changes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

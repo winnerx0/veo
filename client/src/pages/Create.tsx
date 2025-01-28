@@ -45,7 +45,7 @@ const Create = () => {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields, append } = useFieldArray({
     name: "options",
     control: form.control,
   });
@@ -65,6 +65,7 @@ const Create = () => {
         }
       );
       const ans = res.data;
+      console.log(ans)
     },
     onSuccess() {
       toast("Poll Created");
