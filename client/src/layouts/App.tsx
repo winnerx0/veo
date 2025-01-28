@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     async function verify() {
-      const res = await axios.post(`${BACKEND_URL}/api/v1/verify-token`, {
+      const res = await axios.post(`${BACKEND_URL}/api/v1/auth/verify-token`, {
         token,
       });
       const isTokenValid: boolean = res.data;
@@ -24,6 +24,9 @@ const App = () => {
   return (
     <div className="p-4">
       <Outlet />
+      <div className="flex justify-center">
+        <p className="fixed bottom-4 self-center">Built by Winner </p>
+      </div>
     </div>
   );
 };

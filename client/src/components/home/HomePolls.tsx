@@ -6,37 +6,38 @@ import { LuGhost } from "react-icons/lu";
 import { Poll } from "../../../lib/types/index";
 import axios from "axios";
 
-
 const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["polls"],
     queryFn: async () => {
       const res = await axios.get(`${BACKEND_URL}/api/v1/polls/`, {
-       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-       },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       const ans = res.data;
       return ans as Poll[];
     },
   });
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 mt-24">
       {isLoading ? (
         <span className="flex items-center justify-center">Loading</span>
       ) : data && data.length !== 0 ? (
-        data.map((poll) => (
-          <a href={`/polls/${poll.id}`} key={poll.id}>
-            <Card>
-              <CardHeader>
-                <CardTitle>{poll.title}</CardTitle>
-              </CardHeader>
-              <CardFooter>
-                <p>{formatDate(new Date(poll.ending), "LLL E yyyy")}</p>
-              </CardFooter>
-            </Card>
-          </a>
-        ))
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+          {data.map((poll) => (
+            <a href={`/polls/${poll.id}`} key={poll.id}>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{poll.title}</CardTitle>
+                </CardHeader>
+                <CardFooter>
+                  <p>{formatDate(new Date(poll.ending), "LLL E yyyy")}</p>
+                </CardFooter>
+              </Card>
+            </a>
+          ))}
+        </div>
       ) : (
         <div className="h-[400px] w-full flex items-center justify-center">
           {error ? (

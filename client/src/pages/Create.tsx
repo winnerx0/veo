@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { LuCirclePlus } from "react-icons/lu";
+import { LuCirclePlus, LuCircleX } from "react-icons/lu";
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 import { z } from "zod";
@@ -45,7 +45,7 @@ const Create = () => {
     },
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "options",
     control: form.control,
   });
@@ -65,7 +65,7 @@ const Create = () => {
         }
       );
       const ans = res.data;
-      console.log(ans)
+      console.log(ans);
     },
     onSuccess() {
       toast("Poll Created");
@@ -116,7 +116,13 @@ const Create = () => {
                   <FormItem>
                     <FormLabel>Option {index + 1}</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <div className="relative">
+                        <Input {...field} />
+                        <LuCircleX
+                          className="absolute right-4 top-2.5 z-20"
+                          onClick={() => remove(index)}
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -132,12 +138,13 @@ const Create = () => {
           />
           <Button
             type="button"
+            className="rounded-full"
             onClick={() => append({ id: uuid(), name: "" })}
             disabled={fields.length === 5 || isPending}
           >
             <LuCirclePlus className="size-10" />
           </Button>
-          <Button type="submit" disabled={isPending}>
+          <Button type="submit" disabled={isPending} className="rounded-full">
             Create
           </Button>
         </form>

@@ -10,7 +10,7 @@ const HomeTopBar = () => {
 
       <div className="w-full flex items-center justify-between">
         <h1 className='font-bold text-xl'>Your Polls</h1>
-        <Button onClick={() => navigaion('/polls/create')}>Create Poll</Button>
+        <Button onClick={() => navigaion('/polls/create')} className='rounded-full'>Create Poll</Button>
       </div>
     </div>
   )
