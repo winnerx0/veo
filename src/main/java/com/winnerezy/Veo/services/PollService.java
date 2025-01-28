@@ -66,16 +66,16 @@ public class PollService {
 
              Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
 
+             boolean hasVoted = optionRepository.existsByVotesContaining(userService.getCurrentUser().getEmail());
+
              User user = userService.getCurrentUser();
 
              if(poll.getEnding().before(new Date())){
                  return "Poll Expired";
              }
 
-            if(option.getVotes().contains(user.getEmail())){
-                option.setVotes(option.getVotes().stream().filter(vote -> !vote.equals(user.getEmail())).collect(Collectors.toList()));
-                optionRepository.save(option);
-                return "Unvoted Successfully";
+            if(hasVoted){
+                throw new RuntimeException("User Already Voted");
             } else {
                 option.getVotes().add(user.getEmail());
                 optionRepository.save(option);

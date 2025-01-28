@@ -16,7 +16,6 @@ import com.winnerezy.Veo.services.JwtService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
@@ -36,30 +35,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        String jwt = null;
-        Cookie[] cookies = request.getCookies();
+    //     String jwt = null;
+    //     Cookie[] cookies = request.getCookies();
 
-       if(cookies != null) {
-           for (Cookie cookie : cookies) {
-               if(cookie.getName().equals("jwt")){
-                   jwt = cookie.getValue();
-                   break;
-               }
-           }
-       }
-       if(jwt == null){
-           filterChain.doFilter(request, response);
-           return;
-       }
-
-    //    String token = response.getHeader("Authorization");
-
-    //    if (token == null || !token.startsWith("Bearer ")) {
+    //    if(cookies != null) {
+    //        for (Cookie cookie : cookies) {
+    //            if(cookie.getName().equals("jwt")){
+    //                jwt = cookie.getValue();
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    if(jwt == null){
     //        filterChain.doFilter(request, response);
     //        return;
     //    }
 
-    //    String jwt = token.substring(7);
+       String token = request.getHeader("Authorization");
+
+       if (token == null || !token.startsWith("Bearer ")) {
+           filterChain.doFilter(request, response);
+           return;
+       }
+
+       String jwt = token.substring(7);
 
         try {
             final String userEmail = jwtService.extractUsername(jwt);

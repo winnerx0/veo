@@ -10,4 +10,6 @@ import com.winnerezy.Veo.models.Option;
 @Repository
 public interface OptionRepository extends JpaRepository<Option, String> {
     Optional<Option> findByPollIdAndId(String pollId, String id);
+
+    boolean existsByVotesContaining(String voteId);
 }

@@ -22,8 +22,11 @@ import java.util.Date;
 @RestController
 public class PollController {
 
-    @Autowired
-    private PollService pollService;
+    private final  PollService pollService;
+
+    public PollController(PollService pollService){
+        this.pollService = pollService;
+    }
 
     @GetMapping("/")
     public ResponseEntity<Poll[]> getPolls() {

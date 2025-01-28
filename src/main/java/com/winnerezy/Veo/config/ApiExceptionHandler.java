@@ -1,7 +1,8 @@
 package com.winnerezy.Veo.config;
 
-import com.winnerezy.Veo.responses.ApiErrorResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,18 +14,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.winnerezy.Veo.responses.ApiErrorResponse;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler({NoHandlerFoundException.class})
-    public ResponseEntity<ApiErrorResponse> handleNoHandlerFoundException(
-            NoHandlerFoundException ex, HttpServletRequest httpServletRequest) {
-        ApiErrorResponse apiErrorResponse = new ApiErrorResponse("End-point not found");
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body(apiErrorResponse);
-    }
 
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public ResponseEntity<ApiErrorResponse> handleMethodNotSupportedException(
