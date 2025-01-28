@@ -38,7 +38,7 @@ const Login = () => {
     });
     const { token } = res.data;
     localStorage.setItem("token", token);
-    toast("Login Successful")
+    toast("Login Successful");
 
     navigate("/home");
   };
@@ -80,7 +80,10 @@ const Login = () => {
         <span className="text-destructive text-center">{error}</span>
         <p>
           Don&apos;t have an account ?{" "}
-          <a className="text-primary" href={"/register"}>
+          <a
+            className="text-primary cursor-pointer"
+            onClick={() => navigate("/register")}
+          >
             Register
           </a>
         </p>

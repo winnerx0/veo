@@ -87,7 +87,10 @@ const Register = () => {
         <span className="text-destructive text-center">{error}</span>
         <p>
           Have an account ?{" "}
-          <a className="text-primary" href={"/login"}>
+          <a
+            className="text-primary cursor-pointer"
+            onClick={() => navigate("/login")}
+          >
             Login
           </a>
         </p>
