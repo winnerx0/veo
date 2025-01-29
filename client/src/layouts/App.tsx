@@ -2,6 +2,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../lib";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import Header from "@/components/Header";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -22,12 +23,15 @@ const App = () => {
     verify();
   }, [token, navigate]);
   return (
-    <div className="p-4">
-      <Outlet />
-      <div className="flex justify-center">
-        <p className="fixed bottom-4 self-center">Built by Winner </p>
+    <>
+      <Header />
+      <div className="p-4">
+        <Outlet />
+        <div className="flex justify-center">
+          <p className="fixed bottom-4 self-center">Built by Winner </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

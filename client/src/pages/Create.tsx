@@ -19,9 +19,19 @@ import {
   FormLabel,
   FormMessage,
 } from "../components/ui/form";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+
+import { cn } from "../../lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const Create = () => {
-  const [date, setDate] = useState<string>(new Date().toISOString());
+  const [date, setDate] = useState<Date| undefined>(new Date());
 
   const form = useForm<z.infer<typeof PollValidator>>({
     resolver: zodResolver(PollValidator),
@@ -131,11 +141,28 @@ const Create = () => {
             ))}
           </div>
 
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[240px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon />
+                {date ? format(date, "PPP") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
           <Button
             type="button"
             className="rounded-full"

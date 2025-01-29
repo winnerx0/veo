@@ -1,8 +1,12 @@
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { formatDistance, isAfter } from "date-fns";
 import { Poll as PollType } from "lib/types";
+import { useState } from "react";
 import { LuSunMoon } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,6 +14,7 @@ import { BACKEND_URL } from "../../lib";
 
 const Poll = () => {
   const { pollId } = useParams();
+  const [option, setOption] = useState<string>("");
 
   const { data, isLoading } = useQuery({
     queryKey: ["poll"],
@@ -20,9 +25,8 @@ const Poll = () => {
         },
         withCredentials: true,
       });
- 
 
-      return  res.data as PollType
+      return res.data as PollType;
     },
   });
 
@@ -51,8 +55,8 @@ const Poll = () => {
 
   const { mutate, isPending } = useMutation({
     mutationKey: ["vote"],
-    mutationFn: handleVote
-  })
+    mutationFn: handleVote,
+  });
 
   return (
     <section className="w-full h-full flex justify-center items-center">
@@ -66,8 +70,8 @@ const Poll = () => {
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">No data found</h2>
           </div>
-        ) :  isAfter(new Date(data.ending), new Date())? (
-          <>
+        ) : isAfter(new Date(data.ending), new Date()) ? (
+          <section className="flex flex-col gap-6">
             <div className="flex gap-2 justify-between items-center mt-4">
               <h2 className="font-bold text-3xl ">{data.title}</h2>
               <p>
@@ -75,34 +79,59 @@ const Poll = () => {
                 <span>{formatDistance(new Date(data.ending), new Date())}</span>
               </p>
             </div>
-            <div className={`gap-2 text-center grid mt-24`}>
+
+            <RadioGroup onValueChange={(e) => setOption(e)} className="mt-24">
               {data.options.map((option) => (
-                <div key={option.id}>
-                  <Button
-                    className="w-full h-10"
-                    onClick={() => mutate(option.id)}
-                    disabled={isPending}
-                  >
+                <Button
+                  className="w-full h-10"
+                  variant={"outline"}
+                  disabled={isPending}
+                  key={option.id}
+                >
+                  <RadioGroupItem
+                    value={option.id}
+                    id={option.name}
+                  ></RadioGroupItem>
+                  <Label htmlFor={option.name} className="w-full">
                     Vote {option.name}
-                  </Button>
-                </div>
+                  </Label>
+                </Button>
               ))}
-            </div>
-          </>
+            </RadioGroup>
+            <Button onClick={() => mutate(option)}>Vote</Button>
+          </section>
         ) : (
           <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">Poll Ended</h2>
 
-            <div>
-              {
-                data.options.map((option) => (
-                  <section>
-                    <h4>{option.name}</h4>
-                    <h5>{option.votes}</h5>
-                  </section>
-                ))
-              }
+            <div className="mt-24 space-y-2">
+              {data.options.map((option) => (
+                <Button
+                  className="w-[400px] h-10 flex gap-2"
+                  variant={"outline"}
+                  disabled
+                  key={option.id}
+                >
+                  <Label className="">{option.name}</Label>
+              <div className="flex w-full gap-2 items-center justify-end">
+              <h6>{option.votes.length} Votes</h6>
+                  <Progress
+                    value={
+                      option.votes.length > 0
+                        ? (data.options
+                            .map((option) => option.votes)
+                            .map((vote) => vote.length)
+                            .reduce((acc, curr) => acc + curr, 0) /
+                            option.votes.length) *
+                          100
+                        : 0
+                    }
+                    className="w-[60%]"
+                  />
+              </div>
+                </Button>
+              ))}
             </div>
           </div>
         )}
