@@ -115,7 +115,7 @@ const Poll = () => {
                 >
                   <Label className="">{option.name}</Label>
               <div className="flex w-full gap-2 items-center justify-end">
-              <h6>{option.votes.length} Votes</h6>
+              <h6>{option.votes.length} {option.votes.length === 1 ? "Vote" : "Votes"}</h6>
                   <Progress
                     value={
                       option.votes.length > 0
