@@ -17,13 +17,18 @@ import com.winnerezy.Veo.repositories.PollRepository;
 @Service
 public class PollService {
 
-    @Autowired
-    private PollRepository pollRepository;
+    private final PollRepository pollRepository;
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private OptionRepository optionRepository;
+    private final UserService userService;
+
+    private final OptionRepository optionRepository;
+
+    public PollService(PollRepository pollRepository, UserService userService, OptionRepository optionRepository) {
+      this.pollRepository = pollRepository;
+      this.userService = userService;
+      this.optionRepository = optionRepository;
+
+    }
 
     public Poll[] getPolls() {
         Poll[] polls = pollRepository.findByUser(userService.getCurrentUser());
@@ -60,30 +65,24 @@ public class PollService {
     }
 
     public String votePoll(String id, String optionId) {
-        try {
+        Poll poll = pollRepository.findById(id).orElseThrow();
 
-            Poll poll = pollRepository.findById(id).orElseThrow();
+        User user = userService.getCurrentUser();
 
-             Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
+        if(poll.getEnding().before(new Date())){
+            return "Poll Ended";
+        }
 
-             boolean hasVoted = optionRepository.existsByVotesContaining(userService.getCurrentUser().getEmail());
+        Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
 
-             User user = userService.getCurrentUser();
+        boolean hasVoted = optionRepository.existsByPollIdAndVotesContaining(poll.getId(), userService.getCurrentUser().getEmail());
 
-             if(poll.getEnding().before(new Date())){
-                 return "Poll Expired";
-             }
-
-            if(hasVoted){
-                throw new RuntimeException("User Already Voted");
-            } else {
-                option.getVotes().add(user.getEmail());
-                optionRepository.save(option);
-                return "Voted Successfully";
-            }
-
-        } catch (Exception e) {
-            return e.getMessage();
+        if(hasVoted){
+            throw new RuntimeException("User Already Voted");
+        } else {
+            option.getVotes().add(user.getEmail());
+            optionRepository.save(option);
+            return "Voted Successfully";
         }
     }
 

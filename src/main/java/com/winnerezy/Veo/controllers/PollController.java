@@ -42,9 +42,6 @@ public class PollController {
     public ResponseEntity<?> getPoll(@PathVariable("pollId") String pollId) {
         try {
             Poll poll = pollService.getPoll(pollId);
-            if(poll.getEnding().before(new Date())){
-                return ResponseEntity.ok("Poll Ended");
-            }
             return ResponseEntity.ok(poll);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));

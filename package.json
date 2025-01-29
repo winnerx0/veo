@@ -1,1 +1,6 @@
-{"dependencies": {}}
+{
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "react-day-picker": "^9.5.1"
+  }
+}
