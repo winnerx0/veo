@@ -71,12 +71,25 @@ public class AuthenticationService {
     }
 
     public boolean verifyToken(String token){
-        Optional<User> user = userRepository.findByEmail(jwtService.extractUsername(token));
 
-        if(user.isEmpty()){
-            return false;
-        }
-        return jwtService.isTokenValid(token, userDetailsService.loadUserByUsername(jwtService.extractUsername(token)));
+      try {
+          if(token.isEmpty()){
+              return false;
+          }
+
+          boolean validToken = jwtService.isTokenValid(token, userDetailsService.loadUserByUsername(jwtService.extractUsername(token)));
+
+          if(!validToken){
+              return false;
+          }
+
+          Optional<User> user = userRepository.findByEmail(jwtService.extractUsername(token));
+
+          return user.isPresent();
+      } catch (Exception e) {
+          return false;
+      }
+
     }
     
 }

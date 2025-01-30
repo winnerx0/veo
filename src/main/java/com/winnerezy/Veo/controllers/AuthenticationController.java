@@ -71,7 +71,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/verify-token")
-    public boolean verifyToken(@Valid @RequestBody TokenDTO tokenDTO) {
+    public boolean verifyToken(@RequestBody TokenDTO tokenDTO) {
         return authenticationService.verifyToken(tokenDTO.getToken());
     }
 
