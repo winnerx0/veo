@@ -59,7 +59,7 @@ const Poll = () => {
   });
 
   return (
-    <section className="w-full h-full flex justify-center items-center">
+    <section className="w-full flex justify-center items-center">
       <div className="w-full max-w-5xl flex flex-col">
         {isLoading ? (
           <div className="flex h-[calc(100vh-48px)] items-center justify-center">

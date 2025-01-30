@@ -6,7 +6,6 @@ import Header from "@/components/Header";
 
 const App = () => {
   const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,16 +21,17 @@ const App = () => {
     }
     verify();
   }, [token, navigate]);
+
   return (
-    <>
+    <div className="h-screen flex flex-col">
       <Header />
-      <div className="p-4">
+      <main className="flex-1 p-4">
         <Outlet />
-        <div className="flex justify-center">
-          <p className="fixed bottom-4 self-center">Built by Winner </p>
-        </div>
-      </div>
-    </>
+      </main>
+      <footer className="flex justify-center items-center h-14">
+        <p>Built by Winner</p>
+      </footer>
+    </div>
   );
 };
 

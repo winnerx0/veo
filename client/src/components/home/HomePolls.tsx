@@ -22,7 +22,9 @@ const HomePolls = () => {
   return (
     <div className="flex flex-col gap-2 mt-8">
       {isLoading ? (
-        <span className="flex items-center justify-center">Loading</span>
+        <div className="flex items-center justify-center">
+          <span className="text-center">Loading</span>
+        </div>
       ) : data && data.length !== 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
           {data.map((poll) => (

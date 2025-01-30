@@ -31,5 +31,6 @@ createRoot(document.getElementById("root")!).render(
       </BrowserRouter>
     </ReactQueryProvider>
     <ToastContainer />
+   
   </StrictMode>
 );
