@@ -17,7 +17,6 @@ import com.winnerezy.Veo.responses.LoginResponse;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -54,21 +53,10 @@ public class AuthenticationController {
 
             String token = jwtService.generateToken(authenticatedUser);
 
-            Cookie cookie = new Cookie("jwt", token);
-            cookie.setHttpOnly(true);
-            cookie.setSecure(true);
-            cookie.setPath("/");
-            cookie.setDomain("onrender.com");
-            cookie.setMaxAge((int) jwtService.getExpiration() / 1000);
-            cookie.setAttribute("SameSite", "None");
-            response.addCookie(cookie);
-
             LoginResponse loginResponse = new LoginResponse(token, jwtService.getExpiration());
             return ResponseEntity.ok(loginResponse);
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect email or password");
-        } catch (RuntimeException ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Failed");
         }
