@@ -10,9 +10,17 @@ const App = () => {
 
   useEffect(() => {
     async function verify() {
-      const res = await axios.post(`${BACKEND_URL}/api/v1/auth/verify-token`, {
-        token,
-      });
+      const res = await axios.post(
+        `${BACKEND_URL}/api/v1/auth/verify-token`,
+        {
+          token,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const isTokenValid: boolean = res.data;
 
       if (!isTokenValid) {
