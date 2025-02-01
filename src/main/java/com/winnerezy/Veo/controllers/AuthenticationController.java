@@ -37,13 +37,18 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO registerUserDto) {
-        User registeredUser = authenticationService.register(registerUserDto);
+        try {
+            User registeredUser = authenticationService.register(registerUserDto);
 
-        return ResponseEntity.ok(registeredUser);
+            return ResponseEntity.ok(registeredUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletRequest request,
+            HttpServletResponse response) {
         try {
             User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
@@ -51,13 +56,12 @@ public class AuthenticationController {
 
             Cookie cookie = new Cookie("jwt", token);
             cookie.setHttpOnly(true);
-            cookie.setSecure(true); 
+            cookie.setSecure(true);
             cookie.setPath("/");
             cookie.setDomain("onrender.com");
             cookie.setMaxAge((int) jwtService.getExpiration() / 1000);
             cookie.setAttribute("SameSite", "None");
             response.addCookie(cookie);
-
 
             LoginResponse loginResponse = new LoginResponse(token, jwtService.getExpiration());
             return ResponseEntity.ok(loginResponse);
