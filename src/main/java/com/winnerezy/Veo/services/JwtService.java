@@ -46,8 +46,8 @@ public class JwtService {
     private String buildToken(Map<String, Object> extractClaims, UserDetails userDetails, long expiration){
         String token = Jwts
                 .builder()
-                .setSubject(userDetails.getUsername())
                 .setClaims(extractClaims)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

@@ -10,13 +10,18 @@ const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["polls"],
     queryFn: async () => {
-      const res = await axios.get(`${BACKEND_URL}/api/v1/polls/`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const ans = res.data;
-      return ans as Poll[];
+      try {
+        const res = await axios.get(`${BACKEND_URL}/api/v1/polls/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const ans = res.data;
+        return ans as Poll[];
+      } catch (error) {
+        console.log(error)
+        return [];
+      }
     },
   });
   return (

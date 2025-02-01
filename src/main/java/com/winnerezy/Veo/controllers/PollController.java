@@ -22,7 +22,7 @@ import java.util.Date;
 @RestController
 public class PollController {
 
-    private final  PollService pollService;
+    private final PollService pollService;
 
     public PollController(PollService pollService){
         this.pollService = pollService;

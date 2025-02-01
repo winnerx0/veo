@@ -17,8 +17,6 @@ import com.winnerezy.Veo.responses.LoginResponse;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -46,8 +44,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto, HttpServletRequest request,
-            HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO loginUserDto) {
         try {
             User authenticatedUser = authenticationService.authenticate(loginUserDto);
 

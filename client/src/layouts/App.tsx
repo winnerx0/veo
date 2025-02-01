@@ -15,11 +15,7 @@ const App = () => {
         {
           token,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      
       );
       const isTokenValid: boolean = res.data;
 
