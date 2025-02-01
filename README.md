@@ -82,8 +82,6 @@ Frontend
 
     Environment Variables: Customize API endpoints, JWT secrets, and themes in .env.
 
-    Styling: Uses CSS Modules or a UI library (e.g., Material-UI). Modify src/styles/.
-
 Backend
 
     Security: Configure JWT expiration time in SecurityConfig.java.
@@ -95,12 +93,12 @@ Backend
 Tech Stack 🧩
 Frontend	Backend
 React.js	Spring Boot
-Redux (State Mgmt)	Spring Data JPA
-Axios (HTTP Client)	Spring Security
+	        Spring Data JPA
+Axios   	Spring Security
 Shadcn 
 PostgreSQL
 JWT Authentication
-API Endpoints 📡
+API Endpoints 
 Authentication
 
     POST /api/auth/signup - Register a new user.
