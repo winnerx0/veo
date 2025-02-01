@@ -31,14 +31,20 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    await axios.post(`${BACKEND_URL}/api/v1/auth/signup`, data, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/v1/auth/signup`, data);
 
-    navigate("/login");
+      if (res.status !== 200) {
+        throw new Error(res.data);
+      }
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        console.log(error);
+      }
+    }
   };
   const { mutate, isPending } = useMutation({
     mutationFn: handleRegister,
