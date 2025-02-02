@@ -5,7 +5,7 @@ spring:
   application:
     name: Veo
   datasource:
-    url: jdbc:postgresql://ep-damp-morning-a5ctqqj2.us-east-2.aws.neon.tech/neondb?sslmode=require
+    url: jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DATABASE}
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
