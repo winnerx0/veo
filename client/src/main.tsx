@@ -17,8 +17,8 @@ createRoot(document.getElementById("root")!).render(
     <ReactQueryProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Onboarding />} />
           <Route path="/" element={<App />}>
+          <Route path="/" element={<Onboarding />} />
             <Route path="home" element={<Home />} />
             <Route path="polls">
               <Route path="create" element={<Create />} />

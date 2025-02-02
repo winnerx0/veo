@@ -22,7 +22,7 @@ const HeroTitle = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <Button className="bg-primary w-36 h-12 shadow-lg" onClick={() => navigate("/register")}>
+          <Button className="bg-primary w-36 h-12 shadow-xl rounded-sm rounded-tl-3xl rounded-br-3xl" onClick={() => navigate("/register")}>
             Get Started
           </Button>
         </motion.div>

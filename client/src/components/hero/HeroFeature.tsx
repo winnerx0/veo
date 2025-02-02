@@ -20,7 +20,7 @@ const HeroFeature = () => {
         {features.map((feature, index) => (
           <Card className="w-full" key={index}>
             <CardHeader>
-              <CardTitle className="text-xl">
+              <CardTitle className="text-sm sm:text-md md:text-xl">
                 {index + 1}. {feature.title}
               </CardTitle>
             </CardHeader>

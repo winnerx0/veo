@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div className="h-screen flex flex-col">
       <Header />
-      <main className="flex-1 p-4">
+      <main className="flex-1 p-4 flex justify-center">
         <Outlet />
       </main>
       <footer className="flex justify-center items-center h-14">
