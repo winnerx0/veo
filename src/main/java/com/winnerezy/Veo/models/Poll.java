@@ -1,18 +1,24 @@
 package com.winnerezy.Veo.models;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-import lombok.Data;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "poll")
@@ -29,8 +35,8 @@ public class Poll {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "ending")
-    private Date ending;
+    @Column(name = "endieng")
+    private LocalDateTime ending;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     private List<Option> options = new ArrayList<>();

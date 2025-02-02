@@ -1,8 +1,5 @@
 package com.winnerezy.Veo.controllers;
 
-import com.winnerezy.Veo.responses.ApiErrorResponse;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Poll;
+import com.winnerezy.Veo.responses.ApiErrorResponse;
 import com.winnerezy.Veo.services.PollService;
 
-import java.util.Date;
+import jakarta.validation.Valid;
 
 @RequestMapping( "api/v1/polls")
 @RestController

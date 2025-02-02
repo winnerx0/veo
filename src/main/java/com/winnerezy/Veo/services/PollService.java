@@ -1,6 +1,6 @@
 package com.winnerezy.Veo.services;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -67,7 +67,7 @@ public class PollService {
 
         User user = userService.getCurrentUser();
 
-        if(poll.getEnding().before(new Date())){
+        if(poll.getEnding().isBefore(LocalDateTime.now())){
             return "Poll Ended";
         }
 
