@@ -1,118 +1,97 @@
-# Veo
+Veo - Secure Voting Platform 
 
-Veo is an open-source voting platform that allows users to create and manage polls with customizable expiration dates. Built with React.js (frontend) and Spring Boot (backend), it’s designed for simplicity, security, and scalability.
-Features ✨
+Veo is an open-source voting platform designed for creating, managing, and analyzing time-bound polls. Built with modern web technologies, it combines a React.js frontend with a Spring Boot backend to deliver a secure, scalable solution for real-time democratic decision-making.
+Key Features ✨
 
-    Create Polls: Users can create polls with multiple voting options.
+    Poll Management
+    Create polls with custom voting options and expiration dates
 
-    Expiration Dates: Set a deadline for voting on each poll.
+    Real-Time Analytics
+    Live vote tracking with dynamic visualizations
 
-    Real-Time Results: Live updates of vote counts as users participate.
+    JWT Authentication
+    Secure user sessions with JSON Web Tokens
 
-    Authentication: Secure user registration and login (JWT-based).
+    Role-Based Access Control
+    Granular permissions for users and administrators
 
-    Responsive Design: Works seamlessly on desktop and mobile.
+    Responsive Interface
+    Mobile-first design optimized for all devices
 
-    Security: Encrypted API endpoints and role-based access control.
+    Automated Expiration
+    Scheduled poll termination via Spring Boot tasks
 
-    Admin Dashboard: Manage polls, users, and analytics (optional).
-
-Installation 🛠️
+Architecture 🏗️
+Component	Technology Stack
+Frontend	React.js, Axios, Shadcn UI
+Backend	Spring Boot, Spring Security, Spring Data JPA
+Database	PostgreSQL
+Authentication	JWT
+Build Tools	Maven, npm
+Installation Guide 📥
 Prerequisites
 
-    Frontend: Node.js (v16+), npm
+    Node.js v16+ & npm
 
-    Backend: Java 17+, Maven, PostgreSQL
+    Java 17+ & Maven
 
-Steps
-1. Clone the Repository
+    PostgreSQL 14+
 
-``` 
-git clone https://github.com/winnerezy/veo.git
-cd veo
-```
+Setup Instructions
 
-2. Frontend Setup (React.js)
-```bash
-cd frontend
-npm install  # or yarn install
-```
+    Clone Repository
+    bash
+    Copy
 
-3. Backend Setup (Spring Boot)
-```
-cd backend
-mvn clean install
-```
+    git clone https://github.com/winnerezy/veo.git
+    cd veo
 
-4. Configure Environment Variables
+    Database Configuration
 
-Create .env files for backend:
+        Create PostgreSQL database:
+        sql
+        Copy
 
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/veo?createDatabaseIfNotExist=true
-spring.datasource.username=root
-spring.datasource.password=root
-spring.jpa.hibernate.ddl-auto=update
-security.jwt.secret-key=your_jwt_secret_key_here
-security.jwt.expiration=your_expiration_here
-```
-5. Database Setup
+        CREATE DATABASE veo;
 
-    Install PostgreSQL and create a database named veo.
+    Backend Setup
+    bash
+    Copy
 
-    Update the application.properties file with your database credentials.
+    cd backend
+    # Configure application.properties
+    mvn clean install
+    mvn spring-boot:run
 
-6. Run the Application
+    Frontend Setup
+    bash
+    Copy
 
-Backend (Spring Boot):
-```
-cd backend
-mvn spring-boot:run
-```
+    cd frontend
+    npm install
+    npm start
 
-Frontend (React.js):
-```
-cd frontend
-npm start  # or yarn start
-```
-
-The app will be accessible at http://localhost:5173.
 Configuration ⚙️
-Frontend
+Environment Variables
 
-    Environment Variables: Customize API endpoints, JWT secrets, and themes in .env.
+Backend (application.properties):
+properties
+Copy
 
-Backend
+spring.datasource.url=jdbc:postgresql://${POSTGRES_HOST}:5432/${POSTGRES_DATABASE}
+spring.datasource.username=${POSTGRES_USERNAME}
+spring.datasource.password=${POSTGRES_PASSWORD}
+security.jwt.secret-key=${JWT_SECRET}
+security.jwt.expiration=86400000  # 24 hours
 
-    Security: Configure JWT expiration time in SecurityConfig.java.
-
-    CORS: Update allowed origins in WebConfig.java for cross-origin requests.
-
-    Scheduled Tasks: Poll expiration is handled via Spring Boot’s @Scheduled tasks (see PollScheduler.java).
-
-Tech Stack 🧩
-Frontend	Backend
-React.js	Spring Boot
-	        Spring Data JPA
-Axios   	Spring Security
-Shadcn 
-PostgreSQL
-JWT Authentication
-API Endpoints 
+API Documentation 📚
 Authentication
-
-    POST /api/auth/signup - Register a new user.
-
-    POST /api/auth/login - Authenticate a user.
-
-Polls
-
-    GET /api/polls - Fetch all active polls.
-
-    POST /api/polls/create - Create a new poll (requires authentication).
-
-    PUT /api/polls/{id}/ Fetch a poll data.
-
-Votes
-
-    GET /api/polls/{pollId}/votes/{pollId} - Vote for a specific poll.
+Endpoint	Method	Description
+/api/auth/signup	POST	User registration
+/api/auth/login	POST	User authentication
+Poll Management
+Endpoint	Method	Description
+/api/polls	GET	List active polls
+/api/polls/create	POST	Create new poll (authenticated)
+/api/polls/{id}	GET	Get poll details
+/api/polls/{id}/vote/{optonId}	POST	Submit vote
