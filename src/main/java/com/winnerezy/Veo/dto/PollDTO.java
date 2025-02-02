@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winnerezy.Veo.models.Option;
 
 import jakarta.validation.constraints.Future;
@@ -23,7 +24,8 @@ public class PollDTO {
 
     @NotNull(message = "ending cannot be null")
     @Future(message = "Ending must be in the future")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX", timezone = "UTC")  
     private LocalDateTime ending;
 
     @NotEmpty(message = "options cannot be empty")

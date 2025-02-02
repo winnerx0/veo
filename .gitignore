@@ -33,3 +33,4 @@ build/
 
 target/
 .vercelignore
+src/main/resources

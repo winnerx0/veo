@@ -1,7 +1,7 @@
 export declare type Poll = {
     id: string
     title: string;
-    ending: Date
+    ending: number[]
     options: Option[]
 }
 

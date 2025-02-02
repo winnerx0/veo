@@ -26,7 +26,12 @@ const Poll = () => {
         withCredentials: true,
       });
 
-      return res.data as PollType;
+      const ans = res.data as PollType;
+
+      const [year, month, day, hour, minute] = ans.ending;
+      const endingDate = new Date(year, month - 1, day, hour, minute);
+
+      return { ...ans, ending: endingDate };
     },
   });
 
@@ -85,7 +90,6 @@ const Poll = () => {
                 <Button
                   className="w-full h-10"
                   variant={"outline"}
-                  disabled={isPending}
                   key={option.id}
                 >
                   <RadioGroupItem
@@ -98,7 +102,9 @@ const Poll = () => {
                 </Button>
               ))}
             </RadioGroup>
-            <Button onClick={() => mutate(option)}>Vote</Button>
+            <Button onClick={() => mutate(option)} disabled={isPending}>
+              Vote
+            </Button>
           </section>
         ) : (
           <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
@@ -114,22 +120,25 @@ const Poll = () => {
                   key={option.id}
                 >
                   <Label className="">{option.name}</Label>
-              <div className="flex w-full gap-2 items-center justify-end">
-              <h6>{option.votes.length} {option.votes.length === 1 ? "Vote" : "Votes"}</h6>
-                  <Progress
-                    value={
-                      option.votes.length > 0
-                        ? (data.options
-                            .map((option) => option.votes)
-                            .map((vote) => vote.length)
-                            .reduce((acc, curr) => acc + curr, 0) /
-                            option.votes.length) *
-                          100
-                        : 0
-                    }
-                    className="w-[60%]"
-                  />
-              </div>
+                  <div className="flex w-full gap-2 items-center justify-end">
+                    <h6>
+                      {option.votes.length}{" "}
+                      {option.votes.length === 1 ? "Vote" : "Votes"}
+                    </h6>
+                    <Progress
+                      value={
+                        option.votes.length > 0
+                          ? (data.options
+                              .map((option) => option.votes)
+                              .map((vote) => vote.length)
+                              .reduce((acc, curr) => acc + curr, 0) /
+                              option.votes.length) *
+                            100
+                          : 0
+                      }
+                      className="w-[60%]"
+                    />
+                  </div>
                 </Button>
               ))}
             </div>
