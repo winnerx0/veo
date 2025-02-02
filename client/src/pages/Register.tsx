@@ -57,7 +57,7 @@ const Register = () => {
   });
   return (
     <section className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl">
+      <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl shadow-md">
         <h1 className="text-3xl font-bold">Register To Veo</h1>
         <div>
           <Label>Username</Label>

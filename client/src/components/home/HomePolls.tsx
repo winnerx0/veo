@@ -26,13 +26,13 @@ const HomePolls = () => {
   });
 
   return (
-    <div className="flex flex-col gap-2 mt-8">
+    <div className="flex flex-col gap-2">
       {isLoading ? (
-        <div className="flex min-h-[calc(100vh-50px)] items-center justify-center">
-          <span className="text-center">Loading</span>
+        <div className="flex h-[calc(100vh-300px)] items-center justify-center">
+          <span className="text-center loading"></span>
         </div>
       ) : data && data.length !== 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-8">
           {data.map((poll) => {
             const [year, month, day, hour, minute] = poll.ending;
             const endingDate = new Date(year, month - 1, day, hour, minute);

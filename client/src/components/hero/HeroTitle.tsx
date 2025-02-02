@@ -1,7 +1,6 @@
-
-import { RainbowButton } from "@/components/ui/rainbow-button";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
 
 const HeroTitle = () => {
   const navigate = useNavigate();
@@ -23,12 +22,9 @@ const HeroTitle = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.5 }}
         >
-          <RainbowButton
-            className="bg-primary"
-            onClick={() => navigate("/register")}
-          >
+          <Button className="bg-primary w-36 h-12 shadow-lg" onClick={() => navigate("/register")}>
             Get Started
-          </RainbowButton>
+          </Button>
         </motion.div>
       </div>
     </motion.div>

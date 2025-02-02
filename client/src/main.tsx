@@ -30,7 +30,6 @@ createRoot(document.getElementById("root")!).render(
         </Routes>
       </BrowserRouter>
     </ReactQueryProvider>
-    <ToastContainer />
-   
+    <ToastContainer hideProgressBar />
   </StrictMode>
 );

@@ -23,7 +23,6 @@ const Poll = () => {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        withCredentials: true,
       });
 
       const ans = res.data as PollType;
@@ -67,8 +66,8 @@ const Poll = () => {
     <section className="w-full flex justify-center items-center">
       <div className="w-full max-w-5xl flex flex-col">
         {isLoading ? (
-          <div className="flex h-[calc(100vh-48px)] items-center justify-center">
-            <p>Loading</p>
+          <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+            <span className="text-center loading"></span>
           </div>
         ) : !data ? (
           <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
@@ -77,7 +76,7 @@ const Poll = () => {
           </div>
         ) : isAfter(new Date(data.ending), new Date()) ? (
           <section className="flex flex-col gap-6">
-            <div className="flex gap-2 justify-between items-center mt-4">
+            <div className="flex gap-2 justify-between items-center">
               <h2 className="font-bold text-3xl ">{data.title}</h2>
               <p>
                 Ends In{" "}
@@ -107,7 +106,7 @@ const Poll = () => {
             </Button>
           </section>
         ) : (
-          <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
+          <div className="flex h-[calc(100vh-200px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">Poll Ended</h2>
 
@@ -128,11 +127,11 @@ const Poll = () => {
                     <Progress
                       value={
                         option.votes.length > 0
-                          ? (data.options
-                              .map((option) => option.votes)
-                              .map((vote) => vote.length)
-                              .reduce((acc, curr) => acc + curr, 0) /
-                              option.votes.length) *
+                          ? (option.votes.length /
+                              data.options
+                                .map((option) => option.votes)
+                                .map((vote) => vote.length)
+                                .reduce((acc, curr) => acc + curr, 0)) *
                             100
                           : 0
                       }
