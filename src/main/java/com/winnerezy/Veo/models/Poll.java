@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -40,7 +39,6 @@ public class Poll {
 
     @Column(name = "endieng")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX", timezone = "UTC")  
     private LocalDateTime ending;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
