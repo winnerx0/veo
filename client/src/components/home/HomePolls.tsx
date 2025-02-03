@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { LuGhost } from "react-icons/lu";
 import { BACKEND_URL } from "../../../lib";
 import { Poll } from "../../../lib/types/index";
+import Loading from "../Loading";
 
 const HomePolls = () => {
   const { data, isLoading, error } = useQuery({
@@ -28,9 +29,7 @@ const HomePolls = () => {
   return (
     <div className="flex flex-col gap-2">
       {isLoading ? (
-        <div className="flex h-[calc(100vh-300px)] items-center justify-center">
-          <span className="text-center loading"></span>
-        </div>
+        <Loading />
       ) : data && data.length !== 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-8">
           {data.map((poll) => {

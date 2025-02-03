@@ -11,7 +11,7 @@ const Onboarding = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="flex flex-col md:flex-row gap-2 justify-between w-full mt-4"
+        className="flex flex-col md:flex-row gap-8 justify-between w-full mt-24"
       >
         <div className="w-full rounded-md px-2 space-y-2">
           <h2 className="font-bold text-4xl md:w-[500px] ">

@@ -11,6 +11,7 @@ import { LuSunMoon } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../lib";
+import Loading from "@/components/Loading";
 
 const Poll = () => {
   const { pollId } = useParams();
@@ -66,9 +67,7 @@ const Poll = () => {
     <section className="w-full flex justify-center items-center">
       <div className="w-full max-w-5xl flex flex-col">
         {isLoading ? (
-          <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-            <span className="text-center loading"></span>
-          </div>
+       <Loading/>
         ) : !data ? (
           <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
@@ -77,7 +76,7 @@ const Poll = () => {
         ) : isAfter(new Date(data.ending), new Date()) ? (
           <section className="flex flex-col gap-6">
             <div className="flex gap-2 justify-between items-center">
-              <h2 className="font-bold text-3xl ">{data.title}</h2>
+              <h2 className="font-bold text-sm smL:text-md md:text-3xl ">{data.title}</h2>
               <p>
                 Ends In{" "}
                 <span>{formatDistance(new Date(data.ending), new Date())}</span>
