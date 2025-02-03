@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-<div className="grid place-items-center min-h-[calc(100vh-250px)]">
+<div className="grid place-items-center min-h-[calc(100dvh-250px)]">
   <span className="loading"></span>
 </div>
   );

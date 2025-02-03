@@ -77,7 +77,7 @@ const Poll = () => {
         {isLoading ? (
           <Loading />
         ) : !data ? (
-          <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
+          <div className="flex h-[calc(100dvh-48px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">No data found</h2>
           </div>
@@ -120,7 +120,7 @@ const Poll = () => {
             </Button>
           </section>
         ) : (
-          <div className="flex h-[calc(100vh-200px)] justify-center items-center flex-col">
+          <div className="flex h-[calc(100dvh-200px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">Poll Ended</h2>
 
