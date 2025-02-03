@@ -21,28 +21,28 @@ const Onboarding = () => {
             Create polls and share it around with ease. 100% free to use.{" "}
           </h4>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-2 ">
+        <div className="grid h-10 grid-cols-1 md:grid-cols-3 gap-2 w-full">
           <Card className="bg-primary text-white hover:shadow-2xl hover:bg-primary/90">
             <CardContent className="flex items-center justify-center px-12 py-8">
-              <h2 className="font-semibold text-md text-center">
+              <h2 className="font-semibold text-md text-nowrap  text-center">
                 {" "}
                 Unlimited Use
               </h2>
             </CardContent>
           </Card>
-          <Card className="text-foreground hover:shadow-2xl hover:bg-background/90">
+          <Card className="text-foreground hover:shadow-2xl hover:bg-background/90 ">
             <CardContent className="flex items-center justify-center px-12 py-8">
-              <h2 className="font-semibold text-md text-center">
+              <h2 className="font-semibold text-sm text-nowrap text-center">
                 {" "}
-                Unlimited Use
+                Real-Time View
               </h2>
             </CardContent>
           </Card>
           <Card className="bg-primary text-white hover:shadow-2xl hover:bg-primary/90">
             <CardContent className="flex items-center justify-center px-12 py-8">
-              <h2 className="font-semibold text-md text-center">
+              <h2 className="font-semibold text-md text-nowrap  text-center">
                 {" "}
-                Unlimited Use
+                One Time Voting
               </h2>
             </CardContent>
           </Card>
