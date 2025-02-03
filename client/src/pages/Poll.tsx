@@ -48,12 +48,16 @@ const Poll = () => {
         }
       );
 
+      if(res.status !== 200){
+        throw new Error(res.data)
+      }
+
       const ans = res.data;
 
       toast(ans);
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast(JSON.stringify(error.response?.data));
+        toast(error.response?.data);
       }
     }
   };
@@ -76,8 +80,8 @@ const Poll = () => {
         ) : isAfter(new Date(data.ending), new Date()) ? (
           <section className="flex flex-col gap-6">
             <div className="flex gap-2 justify-between items-center">
-              <h2 className="font-bold text-sm smL:text-md md:text-3xl ">{data.title}</h2>
-              <p>
+              <h2 className="font-bold text-xl md:text-3xl">{data.title}</h2>
+              <p className="text-sm sm:text-md md:text-xl">
                 Ends In{" "}
                 <span>{formatDistance(new Date(data.ending), new Date())}</span>
               </p>

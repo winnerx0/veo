@@ -27,7 +27,7 @@ const HomePolls = () => {
   });
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 h-full">
       {isLoading ? (
         <Loading />
       ) : data && data.length !== 0 ? (

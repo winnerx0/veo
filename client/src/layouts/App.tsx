@@ -28,7 +28,7 @@ const App = () => {
       <Title title={"Veo - Smart Voting"} />
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 p-4 flex justify-center">
+        <main className="flex-1 p-4 flex justify-center h-full">
           <Outlet />
         </main>
         <footer className="flex justify-center items-center h-14">
