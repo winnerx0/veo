@@ -12,10 +12,14 @@ import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../lib";
 import Loading from "@/components/Loading";
+import { jwtDecode } from "jwt-decode";
+import { Menu } from "lucide-react";
 
 const Poll = () => {
   const { pollId } = useParams();
   const [option, setOption] = useState<string>("");
+
+  const { sub } = jwtDecode(localStorage.getItem("token") as string);
 
   const { data, isLoading } = useQuery({
     queryKey: ["poll"],
@@ -48,8 +52,8 @@ const Poll = () => {
         }
       );
 
-      if(res.status !== 200){
-        throw new Error(res.data)
+      if (res.status !== 200) {
+        throw new Error(res.data);
       }
 
       const ans = res.data;
@@ -68,23 +72,30 @@ const Poll = () => {
   });
 
   return (
-    <section className="w-full flex justify-center items-center">
+    <section className="relative w-full flex justify-center items-center">
       <div className="w-full max-w-5xl flex flex-col">
         {isLoading ? (
-       <Loading/>
+          <Loading />
         ) : !data ? (
           <div className="flex h-[calc(100vh-48px)] justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">No data found</h2>
           </div>
         ) : isAfter(new Date(data.ending), new Date()) ? (
-          <section className="flex flex-col gap-6">
-            <div className="flex gap-2 justify-between items-center">
+          <section className=" flex flex-col gap-6">
+            <div className="absolute top-0 flex gap-2 justify-between items-center w-full max-w-5xl">
               <h2 className="font-bold text-xl md:text-3xl">{data.title}</h2>
-              <p className="text-sm sm:text-md md:text-xl">
-                Ends In{" "}
-                <span>{formatDistance(new Date(data.ending), new Date())}</span>
-              </p>
+              <div className="flex gap-2 items-center">
+                <p className="text-sm sm:text-md md:text-xl">
+                  Ends In{" "}
+                  <span>
+                    {formatDistance(new Date(data.ending), new Date())}
+                  </span>
+                </p>
+            {
+                sub === data.user &&  <Menu />
+            }
+              </div>
             </div>
 
             <RadioGroup onValueChange={(e) => setOption(e)} className="mt-24">
