@@ -1,21 +1,29 @@
+import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import { formatDistance, isAfter } from "date-fns";
+import { jwtDecode } from "jwt-decode";
 import { Poll as PollType } from "lib/types";
+import { Menu } from "lucide-react";
 import { useState } from "react";
 import { LuSunMoon } from "react-icons/lu";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../lib";
-import Loading from "@/components/Loading";
-import { jwtDecode } from "jwt-decode";
-import { Menu } from "lucide-react";
 
 const Poll = () => {
+  const navigate = useNavigate();
   const { pollId } = useParams();
   const [option, setOption] = useState<string>("");
 
@@ -38,6 +46,33 @@ const Poll = () => {
       return { ...ans, ending: endingDate };
     },
   });
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.delete(
+        `${BACKEND_URL}/api/v1/polls/delete/${pollId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (res.status !== 200) {
+        throw new Error(res.data);
+      }
+
+      const ans = res.data;
+
+      toast(ans);
+      navigate("/home");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        toast(error.response?.data);
+      }
+    }
+  };
 
   const handleVote = async (id: string) => {
     try {
@@ -77,7 +112,7 @@ const Poll = () => {
         {isLoading ? (
           <Loading />
         ) : !data ? (
-          <div className="flex h-[calc(100dvh-48px)] justify-center items-center flex-col">
+          <div className="flex w-full justify-center items-center flex-col">
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">No data found</h2>
           </div>
@@ -85,16 +120,31 @@ const Poll = () => {
           <section className=" flex flex-col gap-6">
             <div className="absolute top-0 flex gap-2 justify-between items-center w-full max-w-5xl">
               <h2 className="font-bold text-xl md:text-3xl">{data.title}</h2>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-4 items-center">
                 <p className="text-sm sm:text-md md:text-xl">
                   Ends In{" "}
                   <span>
                     {formatDistance(new Date(data.ending), new Date())}
                   </span>
                 </p>
-            {
-                sub === data.user &&  <Menu />
-            }
+                {sub === data.user && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="outline-none">
+                      <Menu />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem
+                        onClick={() => navigate(`/polls/edit/${pollId}`)}
+                      >
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => handleDelete()}>
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
             </div>
 

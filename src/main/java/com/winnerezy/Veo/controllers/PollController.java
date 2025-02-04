@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,26 @@ public class PollController {
         }
     }
 
+    @PutMapping("/edit/{pollId}")
+    public ResponseEntity<?> editPoll(@PathVariable("pollId") String pollId, @Valid @RequestBody PollDTO pollDTO) {
+        try {
+            Poll poll = pollService.editPoll(pollId, pollDTO);
+            return ResponseEntity.ok(poll);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
+        }
+    }
+
+    @DeleteMapping("/delete/{pollId}")
+    public ResponseEntity<?> deletePoll(@PathVariable("pollId") String pollId) {
+        try {
+            String delete = pollService.deletePoll(pollId);
+            return ResponseEntity.ok(delete);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
+        }
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Poll> createPoll(@Valid @RequestBody PollDTO pollDTO) {
 
@@ -63,21 +84,6 @@ public class PollController {
                 return ResponseEntity.status(401).body(votePoll);
             }
             return ResponseEntity.ok(votePoll);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deletePoll(@PathVariable("id") String id) {
-        try {
-            String response = pollService.deletePoll(id);
-
-            if(response.equals("Poll Not Found")){
-                return ResponseEntity.status(404).body(response);
-            }
-
-            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(500).body(e.getMessage());
         }

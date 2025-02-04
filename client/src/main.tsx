@@ -11,6 +11,7 @@ import Login from "./pages/Login.tsx";
 import Onboarding from "./pages/Onboarding.tsx";
 import Poll from "./pages/Poll.tsx";
 import Register from "./pages/Register.tsx";
+import Edit from "./pages/Edit.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="home" element={<Home />} />
             <Route path="polls">
               <Route path="create" element={<Create />} />
+              <Route path="edit/:pollId" element={<Edit />} />
               <Route path=":pollId" element={<Poll />} />
             </Route>
           </Route>

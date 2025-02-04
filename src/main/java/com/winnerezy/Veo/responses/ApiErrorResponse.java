@@ -1,16 +1,9 @@
 package com.winnerezy.Veo.responses;
 
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter
-@ToString
-public class ApiErrorResponse {
-
-    private String message;
+public class ApiErrorResponse extends RuntimeException {
 
     public ApiErrorResponse(String message) {
-        this.message = message;
+        super(message);
     }
 }
 

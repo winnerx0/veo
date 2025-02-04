@@ -1,9 +1,4 @@
-
-import {
-  Card,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from "motion/react";
 import { features } from "../../../lib";
 

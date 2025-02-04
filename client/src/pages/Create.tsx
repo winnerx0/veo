@@ -95,7 +95,7 @@ const Create = () => {
   const { mutate, isPending } = useMutation({
     mutationKey: ["poll"],
     mutationFn: async (body: PollValidator) => {
-      const res = await axios.post(
+      await axios.post(
         `${BACKEND_URL}/api/v1/polls/create`,
         { ...body, ending: date },
 
@@ -106,8 +106,6 @@ const Create = () => {
           withCredentials: true,
         }
       );
-      const ans = res.data;
-      console.log(ans);
     },
     onSuccess() {
       toast("Poll Created");

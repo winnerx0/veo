@@ -38,7 +38,7 @@ public class Poll {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "endieng")
+    @Column(name = "ending")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime ending;
 
