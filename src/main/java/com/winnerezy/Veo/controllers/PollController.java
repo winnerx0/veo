@@ -69,10 +69,14 @@ public class PollController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Poll> createPoll(@Valid @RequestBody PollDTO pollDTO) {
+    public ResponseEntity<?> createPoll(@Valid @RequestBody PollDTO pollDTO) {
 
+      try {
         Poll createdPoll = pollService.createPoll(pollDTO);
         return ResponseEntity.ok(createdPoll);
+      } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
+      }
     }
 
     @PostMapping("/{id}/vote/{optionId}")

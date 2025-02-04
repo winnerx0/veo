@@ -34,6 +34,7 @@ import Loading from "@/components/Loading";
 
 const Create = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+
   const [isOpen, setIsOpen] = useState(false);
 
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);

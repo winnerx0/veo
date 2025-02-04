@@ -46,15 +46,18 @@ public class PollService {
         poll.setTitle(pollDTO.getTitle());
         poll.setUser(userService.getCurrentUser());
         poll.setEnding(pollDTO.getEnding());
-
+        
         Poll createdPoll = pollRepository.save(poll);
-
         List<Option> options = pollDTO.getOptions();
-
-        options.forEach(option -> {
-            optionRepository.save(option);
-        });
-
+        
+        options.forEach(option ->  {
+            
+            option.setName(option.getName());;
+            option.setPoll(poll);
+        }
+        );
+        optionRepository.saveAll(options);
+        
         return createdPoll;
     }
 

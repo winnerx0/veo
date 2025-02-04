@@ -1,6 +1,7 @@
 package com.winnerezy.Veo.dto;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import com.winnerezy.Veo.models.Option;
@@ -25,4 +26,8 @@ public class PollDTO {
 
     @NotEmpty(message = "options cannot be empty")
     private List<Option> options;
+
+    public void setEnding(LocalDateTime ending){
+        this.ending = ending.atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 }

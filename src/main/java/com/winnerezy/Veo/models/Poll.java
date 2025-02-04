@@ -1,6 +1,7 @@
 package com.winnerezy.Veo.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +50,8 @@ public class Poll {
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
     @JsonIdentityReference(alwaysAsId = true)
     private User user;
+
+    public void setEnding(LocalDateTime ending){
+        this.ending = ending.atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
 }
