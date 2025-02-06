@@ -120,6 +120,15 @@ const Edit = () => {
       title: data?.title,
       options: data?.options,
     });
+
+    if (Array.isArray(data?.ending)) {
+      const [year, month, day, hour, minute] = data.ending;
+      const endingDate = new Date(year, month - 1, day, hour, minute);
+      setDate(new Date(endingDate))
+    } else {
+      console.error("Invalid data format");
+    }
+    
   }, [data, form]);
 
   const { fields, append, remove } = useFieldArray({
