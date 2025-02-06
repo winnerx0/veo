@@ -1,7 +1,9 @@
 package com.winnerezy.Veo.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -46,18 +48,18 @@ public class PollService {
         poll.setTitle(pollDTO.getTitle());
         poll.setUser(userService.getCurrentUser());
         poll.setEnding(pollDTO.getEnding());
-        
+
         Poll createdPoll = pollRepository.save(poll);
         List<Option> options = pollDTO.getOptions();
-        
-        options.forEach(option ->  {
-            
-            option.setName(option.getName());;
+
+        options.forEach(option -> {
+
+            option.setName(option.getName());
+
             option.setPoll(poll);
-        }
-        );
+        });
         optionRepository.saveAll(options);
-        
+
         return createdPoll;
     }
 
@@ -77,7 +79,6 @@ public class PollService {
 
         List<Option> options = optionRepository.findAllByPollId(pollId);
 
-
         options.forEach(option -> {
             optionRepository.deleteByPollId(pollId);
         });
@@ -93,17 +94,29 @@ public class PollService {
 
         poll.setEnding(pollDTO.getEnding());
 
-        List<Option> options = pollDTO.getOptions();
+        List<Option> options = poll.getOptions();
 
-        options.forEach(option -> {
+        List<Option> updatedOptions = new ArrayList<>();
 
-            option.setPoll(poll);
+        for (Option newOption : pollDTO.getOptions()) {
+            Optional<Option> existingOption = options.stream()
+                    .filter(o -> o.getId().equals(newOption.getId()))
+                    .findFirst();
 
-        });
-        poll.setOptions(options);
-        Poll editedPoll = pollRepository.save(poll);
-        options.forEach(option -> optionRepository.save(option));
-        return editedPoll;
+            if (existingOption.isPresent()) {
+                Option opt = existingOption.get();
+                opt.setName(newOption.getName());
+                updatedOptions.add(opt);
+            } else {
+                newOption.setPoll(poll);
+                options.add(newOption);
+            }
+            updatedOptions.forEach(option -> option.setPoll(poll));
+
+
+        }
+        poll.setOptions(updatedOptions);
+        return pollRepository.save(poll);
     }
 
     public String votePoll(String id, String optionId) {
