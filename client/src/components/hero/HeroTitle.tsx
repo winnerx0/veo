@@ -10,6 +10,7 @@ const HeroTitle = () => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5, duration: 0.5 }}
+      className="mt-24"
     >
       <div className="self-center flex flex-col gap-4 items-center mt-24">
         <h3 className="font-bold text-center max-w-5xl">

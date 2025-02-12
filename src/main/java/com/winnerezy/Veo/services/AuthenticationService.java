@@ -93,5 +93,16 @@ public class AuthenticationService {
       }
 
     }
+
+    public String deleteAccount(String email) {
+
+        if(!userRepository.existsByEmail(email)){
+            throw new IllegalArgumentException("No User Found");
+        }
+
+       
+        userRepository.deleteByEmail(email);
+        return "Deleted Sucessfully";
+    }
     
 }

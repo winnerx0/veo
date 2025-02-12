@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "motion/react";
 const Onboarding = () => {
   return (
-    <div className="w-full max-w-5xl px-2 flex flex-col gap-5 items-center justify-center self-center">
+   <main className="flex w-full items-center justify-center">
+     <div className="w-full max-w-5xl px-2 flex flex-col gap-5 items-center justify-center self-center">
       <HeroTitle />
       <HeroFeature />
       <motion.div
@@ -49,6 +50,7 @@ const Onboarding = () => {
         </div>
       </motion.div>
     </div>
+   </main>
   );
 };
 

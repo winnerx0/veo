@@ -1,9 +1,9 @@
-import axios from "axios";
-import { BACKEND_URL } from "../../lib";
-import { useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
+import axios from "axios";
+import { useEffect } from "react";
 import { Title } from "react-admin";
+import { Outlet, useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../lib";
 
 const App = () => {
   const token = localStorage.getItem("token");

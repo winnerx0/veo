@@ -12,14 +12,16 @@ import Onboarding from "./pages/Onboarding.tsx";
 import Poll from "./pages/Poll.tsx";
 import Register from "./pages/Register.tsx";
 import Edit from "./pages/Edit.tsx";
+import { Analytics } from "react-lens-analytics";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
+    <Analytics projectId={process.env.REACT_APP_PROJECT_SECRET!} />
     <ReactQueryProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />}>
           <Route path="/" element={<Onboarding />} />
+          <Route path="/" element={<App />}>
             <Route path="home" element={<Home />} />
             <Route path="polls">
               <Route path="create" element={<Create />} />

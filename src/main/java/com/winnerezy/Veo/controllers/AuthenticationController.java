@@ -3,6 +3,7 @@ package com.winnerezy.Veo.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.winnerezy.Veo.responses.LoginResponse;
 import com.winnerezy.Veo.services.AuthenticationService;
 import com.winnerezy.Veo.services.JwtService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -57,6 +59,25 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Authentication Failed");
+        }
+    }
+
+    @DeleteMapping("/delete-account")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization");
+
+        if(authToken.isBlank()){
+            throw new RuntimeException("No authtentication token provided");
+        }
+
+        String email = jwtService.extractUsername(authToken);
+
+        try {
+            String response = authenticationService.deleteAccount(email);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
