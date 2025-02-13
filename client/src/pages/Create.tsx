@@ -31,11 +31,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Loading from "@/components/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const hours = Array.from({ length: 12 }, (_, i) => i + 1);
   const handleDateSelect = (selectedDate: Date | undefined) => {
@@ -110,6 +113,7 @@ const Create = () => {
     },
     onSuccess() {
       toast("Poll Created");
+      navigate("/home");
     },
     onError(error) {
       if (error instanceof AxiosError) {
