@@ -21,7 +21,7 @@ const initialState = {
 
 const Register = () => {
   const [data, setData] = useState<Register>(initialState);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | string[] | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,19 +31,10 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    try {
-      const res = await axios.post(`${BACKEND_URL}/api/v1/auth/signup`, data);
+    const res = await axios.post(`${BACKEND_URL}/api/v1/auth/signup`, data);
 
-      if (res.status !== 200) {
-        throw new Error(res.data);
-      }
-
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-      if (error instanceof AxiosError) {
-        console.log(error);
-      }
+    if (res.status !== 200) {
+      throw new Error(res.data);
     }
   };
   const { mutate, isPending } = useMutation({
@@ -51,10 +42,13 @@ const Register = () => {
     mutationKey: ["register"],
     onError(error) {
       if (error instanceof AxiosError) {
-        setError(JSON.stringify(error.response?.data));
+        setError(Object.values(error.response?.data));
       }
     },
   });
+
+  console.log(error);
+
   return (
     <section className="min-h-full w-full flex items-center justify-center">
       <div className="flex flex-col py-6 px-4 gap-4 border w-full max-w-[400px] rounded-2xl shadow-md">
@@ -90,7 +84,15 @@ const Register = () => {
             onChange={handleChange}
           />
         </div>
-        <span className="text-destructive text-center">{error}</span>
+        <div className="flex flex-col items-center">
+          {error && Array.isArray(error) ? (
+            error.map((e) => (
+              <span className="text-destructive text-center">{e}</span>
+            ))
+          ) : (
+            <span>{error}</span>
+          )}
+        </div>
         <p>
           Have an account ?{" "}
           <a

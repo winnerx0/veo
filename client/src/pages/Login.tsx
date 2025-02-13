@@ -20,7 +20,7 @@ const initialState = {
 
 const Login = () => {
   const [data, setData] = useState<Login>(initialState);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | string[] | null>(null);
 
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const Login = () => {
     mutationKey: ["login"],
     onError(error) {
       if (error instanceof AxiosError) {
-        setError(JSON.stringify(error.response?.data));
+        setError(Object.values(error.response?.data));
       }
     },
   });
@@ -77,7 +77,15 @@ const Login = () => {
             onChange={handleChange}
           />
         </div>
-        <span className="text-destructive text-center">{error}</span>
+        <div className="flex flex-col items-center">
+          {error && Array.isArray(error) ? (
+            error.map((e) => (
+              <span className="text-destructive text-center">{e}</span>
+            ))
+          ) : (
+            <span>{error}</span>
+          )}
+        </div>
         <p>
           Don&apos;t have an account ?{" "}
           <a
