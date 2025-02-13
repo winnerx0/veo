@@ -11,8 +11,10 @@ import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.models.User;
+import com.winnerezy.Veo.models.Vote;
 import com.winnerezy.Veo.repositories.OptionRepository;
 import com.winnerezy.Veo.repositories.PollRepository;
+import com.winnerezy.Veo.repositories.VoteRepository;
 
 @Service
 public class PollService {
@@ -23,10 +25,13 @@ public class PollService {
 
     private final OptionRepository optionRepository;
 
-    public PollService(PollRepository pollRepository, UserService userService, OptionRepository optionRepository) {
+    private final VoteRepository voteRepository;
+
+    public PollService(PollRepository pollRepository, VoteRepository voteRepository, UserService userService, OptionRepository optionRepository) {
         this.pollRepository = pollRepository;
         this.userService = userService;
         this.optionRepository = optionRepository;
+        this.voteRepository = voteRepository;
 
     }
 
@@ -130,13 +135,17 @@ public class PollService {
 
         Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
 
-        boolean hasVoted = optionRepository.existsByPollIdAndVotesContaining(poll.getId(),
-                userService.getCurrentUser().getEmail());
+        boolean hasVoted = voteRepository.existsByUserIdAndPollId(userService.getCurrentUser().getId(), poll.getId());
 
         if (hasVoted) {
             throw new RuntimeException("User Already Voted");
         } else {
-            option.getVotes().add(user.getEmail());
+            Vote newVote = new Vote();
+            newVote.setUserId(user.getId());
+            newVote.setOption(option);
+            newVote.setPoll(poll);
+            voteRepository.save(newVote);
+            option.getVotes().add(newVote);
             optionRepository.save(option);
             return "Voted Successfully";
         }
