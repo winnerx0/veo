@@ -15,7 +15,7 @@ const HeroFeature = () => {
         {features.map((feature, index) => (
           <Card className="w-full h-16 flex items-center" key={index}>
             <CardHeader>
-              <CardTitle className="text-nowrap sm:text-md md:text-xl flex items-center">
+              <CardTitle className="text-[clamp(15px,2vw,1.5rem)] flex items-center">
                 {index + 1}. {feature.title}
               </CardTitle>
             </CardHeader>
