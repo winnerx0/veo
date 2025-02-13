@@ -52,7 +52,7 @@ const Login = () => {
     },
   });
   return (
-    <section className="min-h-[100dvh] flex items-center justify-center">
+    <section className="min-h-full flex items-center justify-center">
       <div className="flex flex-col py-6 px-4 gap-4 border w-[400px] rounded-2xl shadow-md">
         <h1 className="text-3xl font-bold">Login To Veo</h1>
 

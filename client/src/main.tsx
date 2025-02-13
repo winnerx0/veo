@@ -13,6 +13,7 @@ import Poll from "./pages/Poll.tsx";
 import Register from "./pages/Register.tsx";
 import Edit from "./pages/Edit.tsx";
 import { Analytics } from "react-lens-analytics";
+import Auth from "./layouts/Auth.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -29,8 +30,10 @@ createRoot(document.getElementById("root")!).render(
               <Route path=":pollId" element={<Poll />} />
             </Route>
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Auth/>}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        </Route>
         </Routes>
       </BrowserRouter>
     </ReactQueryProvider>

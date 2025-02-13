@@ -32,7 +32,7 @@ const App = () => {
           <Outlet />
         </main>
         <footer className="flex justify-center items-center h-14">
-          <p>Built by Winner</p>
+          <p>Built by <a href="https://github.com/winnerezy">Winner</a></p>
         </footer>
       </div>
     </>
