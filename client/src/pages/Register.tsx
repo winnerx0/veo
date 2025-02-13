@@ -36,18 +36,17 @@ const Register = () => {
     if (res.status !== 200) {
       throw new Error(res.data);
     }
+    navigate("/login")
   };
   const { mutate, isPending } = useMutation({
     mutationFn: handleRegister,
     mutationKey: ["register"],
     onError(error) {
       if (error instanceof AxiosError) {
-        setError(Object.values(error.response?.data));
+        setError(typeof error.response?.data === "object" ? Object.values(error.response?.data) : error.response?.data);
       }
     },
   });
-
-  console.log(error);
 
   return (
     <section className="min-h-full w-full flex items-center justify-center">
@@ -90,7 +89,7 @@ const Register = () => {
               <span className="text-destructive text-center">{e}</span>
             ))
           ) : (
-            <span>{error}</span>
+            <span className="text-destructive text-center">{error}</span>
           )}
         </div>
         <p>

@@ -47,7 +47,7 @@ const Login = () => {
     mutationKey: ["login"],
     onError(error) {
       if (error instanceof AxiosError) {
-        setError(Object.values(error.response?.data));
+        setError(typeof error.response?.data === "object" ? Object.values(error.response?.data) : error.response?.data);
       }
     },
   });
@@ -83,7 +83,7 @@ const Login = () => {
               <span className="text-destructive text-center">{e}</span>
             ))
           ) : (
-            <span>{error}</span>
+            <span className="text-destructive text-center">{error}</span>
           )}
         </div>
         <p>
