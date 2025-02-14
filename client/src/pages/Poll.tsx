@@ -171,6 +171,26 @@ const Poll = () => {
           </section>
         ) : (
           <div className="flex h-[calc(100dvh-200px)] justify-center items-center flex-col">
+            <div className="w-full relative">
+              {sub === data.user && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger className="outline-none absolute right-0 top-0">
+                    <Menu />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem
+                      onClick={() => navigate(`/polls/edit/${pollId}`)}
+                    >
+                      Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => handleDelete()}>
+                      Delete
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
+            </div>
             <LuSunMoon size={40} className="text-primary" />
             <h2 className="font-bold text-3xl">Poll Ended</h2>
 

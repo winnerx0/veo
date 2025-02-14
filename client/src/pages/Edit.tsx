@@ -31,11 +31,12 @@ import {
 } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Poll } from "lib/types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
 const Edit = () => {
   const { pollId } = useParams();
+  const navigate = useNavigate()
 
   const { data, isLoading } = useQuery({
     queryKey: ["edit"],
@@ -49,6 +50,7 @@ const Edit = () => {
         if (res.status !== 200) {
           throw new Error(res.data);
         }
+        
         return res.data as Poll;
       } catch (error) {
         if (error instanceof Error) {
@@ -155,6 +157,8 @@ const Edit = () => {
     },
     onSuccess() {
       toast("Poll Edited");
+      navigate(`/polls/${data?.id}`)
+
     },
     onError(error) {
       if (error instanceof Error) {
