@@ -114,7 +114,7 @@ public class PollService {
                 updatedOptions.add(opt);
             } else {
                 newOption.setPoll(poll);
-                options.add(newOption);
+                updatedOptions.add(newOption);
             }
             updatedOptions.forEach(option -> option.setPoll(poll));
 
