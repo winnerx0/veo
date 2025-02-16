@@ -281,19 +281,19 @@ const Create = () => {
               </PopoverContent>
             </Popover>
 
-          <div className="w-full flex items-center justify-between">
+            <div className="w-full gap-4 flex items-center justify-between">
               <Button
-                          type="button"
-                          className="w-[100px]"
-                          onClick={() => append({ id: uuid(), name: "" })}
-                          disabled={fields.length === 5 || isPending}
-                        >
-                          <LuCirclePlus className="size-10" />
-                        </Button>
-                        <Button type="submit"   className="w-[200px]" disabled={isPending}>
-                          Create
-                        </Button>
-          </div>
+                type="button"
+                className="w-[100px]"
+                onClick={() => append({ id: uuid(), name: "" })}
+                disabled={fields.length === 5 || isPending}
+              >
+                <LuCirclePlus className="size-10" />
+              </Button>
+              <Button type="submit" className="w-[200px]" disabled={isPending}>
+                Create
+              </Button>
+            </div>
           </form>
         </Form>
       </div>

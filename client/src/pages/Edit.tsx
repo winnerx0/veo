@@ -36,7 +36,7 @@ import { cn } from "../../lib/utils";
 
 const Edit = () => {
   const { pollId } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
     queryKey: ["edit"],
@@ -50,7 +50,7 @@ const Edit = () => {
         if (res.status !== 200) {
           throw new Error(res.data);
         }
-        
+
         return res.data as Poll;
       } catch (error) {
         if (error instanceof Error) {
@@ -126,11 +126,10 @@ const Edit = () => {
     if (Array.isArray(data?.ending)) {
       const [year, month, day, hour, minute] = data.ending;
       const endingDate = new Date(year, month - 1, day, hour, minute);
-      setDate(new Date(endingDate))
+      setDate(new Date(endingDate));
     } else {
       console.error("Invalid data format");
     }
-    
   }, [data, form]);
 
   const { fields, append, remove } = useFieldArray({
@@ -157,8 +156,7 @@ const Edit = () => {
     },
     onSuccess() {
       toast("Poll Edited");
-      navigate(`/polls/${data?.id}`)
-
+      navigate(`/polls/${data?.id}`);
     },
     onError(error) {
       if (error instanceof Error) {
@@ -332,21 +330,23 @@ const Edit = () => {
                 </PopoverContent>
               </Popover>
 
-              <Button
-                type="button"
-                className="rounded-full"
-                onClick={() => append({ id: uuid(), name: "" })}
-                disabled={fields.length === 5 || isPending}
-              >
-                <LuCirclePlus className="size-10" />
-              </Button>
-              <Button
-                type="submit"
-                disabled={isPending}
-                className="rounded-full"
-              >
-                Edit
-              </Button>
+              <div className="w-full gap-4 flex items-center justify-between">
+                <Button
+                  type="button"
+                  className="w-[100px]"
+                  onClick={() => append({ id: uuid(), name: "" })}
+                  disabled={fields.length === 5 || isPending}
+                >
+                  <LuCirclePlus className="size-10" />
+                </Button>
+                <Button
+                  type="submit"
+                  className="w-[200px]"
+                  disabled={isPending}
+                >
+                  Edit
+                </Button>
+              </div>
             </form>
           </Form>
         </div>

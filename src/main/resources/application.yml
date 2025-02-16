@@ -19,6 +19,8 @@ spring:
     show-sql: true
     properties:
       hibernate:
+        jdbc: 
+          time-zone: SYSTEM
         dialect: org.hibernate.dialect.PostgreSQLDialect
 security:
   jwt:
