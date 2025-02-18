@@ -1,6 +1,8 @@
 package com.winnerezy.Veo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +33,7 @@ public class Vote {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "option_id", nullable = false)
-    @JsonIgnore
+    @JsonIncludeProperties({ "name", "id" })
     private Option option;
 
     @ManyToOne(fetch = FetchType.LAZY)

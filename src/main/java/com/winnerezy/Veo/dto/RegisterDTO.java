@@ -9,7 +9,6 @@ import lombok.Data;
 public class RegisterDTO {
 
    @NotBlank(message = "Enter a valid username")
-   @Size(min = 5, max = 10, message = "Username has to be between 5 and 10 characters")
    private String username;
 
    @NotBlank(message = "Email must not be blank")
@@ -17,6 +16,6 @@ public class RegisterDTO {
    private String email;
 
    @NotBlank(message = "Password must not be blank")
-   @Size(min = 3, max = 10, message = "Password has to be between 5 and 10 characters")
+   @Size(min = 3, message = "Password has to be at least 3 characters")
    private String password;
 }

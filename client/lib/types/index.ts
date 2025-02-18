@@ -6,8 +6,21 @@ export declare type Poll = {
   user: string;
 };
 
-declare type Option = {
+export declare type Option = {
   id: string;
   name: string;
   votes: string[];
 };
+
+export declare type Vote = {
+  id: string
+  userid: string
+  option: Pick<Option, "id" | "name">
+}
+
+export declare type User = {
+  id: string
+  username: string
+  password: string
+  email: string
+}

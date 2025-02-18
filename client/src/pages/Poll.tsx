@@ -139,6 +139,12 @@ const Poll = () => {
                         Edit
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => navigate(`/polls/admin/${pollId}`)}
+                      >
+                        Admin
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => handleDelete()}>
                         Delete
                       </DropdownMenuItem>
@@ -182,6 +188,11 @@ const Poll = () => {
                       onClick={() => navigate(`/polls/edit/${pollId}`)}
                     >
                       Edit
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => navigate(`/polls/admin/${pollId}`)}
+                    >
+                      Admin
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={() => handleDelete()}>

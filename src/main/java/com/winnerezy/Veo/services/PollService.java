@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.winnerezy.Veo.dto.PollDTO;
+import com.winnerezy.Veo.dto.VoteDTO;
+import com.winnerezy.Veo.exceptions.NoPollFound;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.models.User;
@@ -149,5 +151,11 @@ public class PollService {
             optionRepository.save(option);
             return "Voted Successfully";
         }
+    }
+
+    public List<Vote> getVotes(String pollId){
+        Poll poll = pollRepository.findById(pollId).orElseThrow(() -> new NoPollFound("No Poll Found"));
+
+        return poll.getVotes();
     }
 }

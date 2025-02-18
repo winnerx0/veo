@@ -14,6 +14,7 @@ import Register from "./pages/Register.tsx";
 import Edit from "./pages/Edit.tsx";
 import { Analytics } from "react-lens-analytics";
 import Auth from "./layouts/Auth.tsx";
+import Admin from "./pages/Admin.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -28,12 +29,13 @@ createRoot(document.getElementById("root")!).render(
               <Route path="create" element={<Create />} />
               <Route path="edit/:pollId" element={<Edit />} />
               <Route path=":pollId" element={<Poll />} />
+              <Route path="admin/:pollId" element={<Admin />} />
             </Route>
           </Route>
-        <Route path="/" element={<Auth/>}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        </Route>
+          <Route path="/" element={<Auth />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </ReactQueryProvider>

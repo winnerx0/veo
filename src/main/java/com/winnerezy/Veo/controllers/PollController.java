@@ -1,5 +1,7 @@
 package com.winnerezy.Veo.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.winnerezy.Veo.dto.PollDTO;
 import com.winnerezy.Veo.models.Poll;
+import com.winnerezy.Veo.models.Vote;
 import com.winnerezy.Veo.responses.ApiErrorResponse;
 import com.winnerezy.Veo.services.PollService;
 
@@ -92,4 +95,15 @@ public class PollController {
             return ResponseEntity.status(500).body(e.getMessage());
         }
     }
+
+    @GetMapping("/votes/{pollId}")
+    public ResponseEntity<?> getVotes(@PathVariable("pollId") String pollId) {
+        try {
+            List<Vote> votes = pollService.getVotes(pollId);
+            return ResponseEntity.ok(votes);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
+        }
+    }
+
 }
