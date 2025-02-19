@@ -30,6 +30,13 @@ const HomePolls = () => {
     <div className="flex flex-col gap-2 h-full">
       {isLoading ? (
         <Loading />
+      ) :  data?.length === 0 ? (
+        <div className="flex items-center justify-center flex-col gap-4">
+          <LuGhost size={30} />
+          <span className="font-semibold text-2xl text-center">
+            No Polls Created
+          </span>
+        </div>
       ) : data && data.length !== 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mt-8">
           {data.map((poll) => {
@@ -53,14 +60,7 @@ const HomePolls = () => {
         <div className="h-[400px] w-full flex items-center justify-center">
           {error ? (
             <span>{error.message}</span>
-          ) : (
-            <div className="flex items-center justify-center flex-col gap-4">
-              <LuGhost size={30} />
-              <span className="font-semibold text-2xl text-center">
-                No Polls Created
-              </span>
-            </div>
-          )}
+          )  : <></>}
         </div>
       )}
     </div>
