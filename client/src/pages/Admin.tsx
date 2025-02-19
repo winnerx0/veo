@@ -1,36 +1,37 @@
 import Loading from "@/components/Loading";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { BACKEND_URL } from "../../lib/index";
+import { jwtDecode } from "jwt-decode";
+import { Option, User } from "lib/types";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { User, Vote } from "lib/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import { BACKEND_URL } from "../../lib/index";
 
 const Admin = () => {
   const { pollId } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const { sub } = jwtDecode(localStorage.getItem("token") as string);
-  
+  const { sub } = jwtDecode(localStorage.getItem("token") as string);
 
-      const { data: user } = useQuery({
-        queryKey: ["user"],
-        queryFn: async () => {
-          const res = await axios.get(`${BACKEND_URL}/api/v1/users/me`, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          });
-    
-          const ans = res.data as User;
-    
-          return ans
+  useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axios.get(`${BACKEND_URL}/api/v1/users/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+
+      const ans = res.data as User;
+
+      if (ans?.username !== sub) {
+        navigate(-1);
+      }
+    },
+  });
 
   const { data, isLoading, refetch, isRefetching } = useQuery({
     queryKey: ["votes"],
@@ -48,7 +49,7 @@ const Admin = () => {
           throw new Error(res.data);
         }
         const ans = res.data;
-        return ans as Vote[];
+        return ans as Option[];
       } catch (error) {
         if (error instanceof AxiosError) {
           toast(error.message);
@@ -65,36 +66,22 @@ const Admin = () => {
   }, [isRefetching, refetch]);
   if (isLoading) return <Loading />;
 
-  const votes = data?.reduce<Record<string, number>>((acc, item) => {
-    const optionName = item.option.name;
-
-    if (!acc[optionName]) {
-      acc[optionName] = 0;
-    }
-
-    acc[optionName]++;
-    return acc;
-  }, {});
-
-  if(user?.username !== sub){
-    navigate(-1)
-  }
   return (
     <div className="flex flex-col items-center w-full">
       <div className="w-full grid place-items-center max-w-5xl">
         <h1 className="text-[clamp(30px,5vw,5rem)]">Live Votes View</h1>
 
-        {data && votes ? (
+        {data ? (
           <div className="flex flex-col md:flex-row items-center justify-center gap-2 w-full">
-            {Object.entries(votes).map(([key, value]) => (
-              <Card key={key} className="w-full">
+            {data.map((option) => (
+              <Card key={option.id} className="w-full">
                 <CardHeader>
                   <CardTitle className="text-[clamp(20px,2.5vw,2rem)]">
-                    {key}
+                    {option.name}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-[clamp(15px,2vw,1rem)]">
-                  <h1> Vote Count: {value}</h1>
+                  <h1> Vote Count: {option.votes.length}</h1>
                 </CardContent>
               </Card>
             ))}

@@ -88,7 +88,6 @@ public class AuthenticationService {
 
           return user.isPresent();
       } catch (Exception e) {
-        System.out.println(e.getMessage());
          return false;
       }
 

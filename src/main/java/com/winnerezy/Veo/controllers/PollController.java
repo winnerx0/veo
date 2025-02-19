@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.winnerezy.Veo.dto.PollDTO;
+import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
-import com.winnerezy.Veo.models.Vote;
 import com.winnerezy.Veo.responses.ApiErrorResponse;
 import com.winnerezy.Veo.services.PollService;
 
@@ -37,7 +37,7 @@ public class PollController {
             Poll[] polls = pollService.getPolls();
             return ResponseEntity.ok(polls);
         } catch (Exception e) {
-            return ResponseEntity.status(500).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -88,19 +88,19 @@ public class PollController {
             String votePoll = pollService.votePoll(id, optionId);
 
             if(votePoll.equals("Poll Expired")){
-                return ResponseEntity.status(401).body(votePoll);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(votePoll);
             }
             return ResponseEntity.ok(votePoll);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
     @GetMapping("/votes/{pollId}")
     public ResponseEntity<?> getVotes(@PathVariable("pollId") String pollId) {
         try {
-            List<Vote> votes = pollService.getVotes(pollId);
-            return ResponseEntity.ok(votes);
+            List<Option> options = pollService.getVotes(pollId);
+            return ResponseEntity.ok(options);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
         }

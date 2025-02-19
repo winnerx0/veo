@@ -153,9 +153,9 @@ public class PollService {
         }
     }
 
-    public List<Vote> getVotes(String pollId){
+    public List<Option> getVotes(String pollId){
         Poll poll = pollRepository.findById(pollId).orElseThrow(() -> new NoPollFound("No Poll Found"));
 
-        return poll.getVotes();
+        return poll.getOptions();
     }
 }
