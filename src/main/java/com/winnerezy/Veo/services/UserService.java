@@ -1,25 +1,23 @@
 package com.winnerezy.Veo.services;
 
-import com.winnerezy.Veo.models.User;
-import com.winnerezy.Veo.repositories.UserRepository;
-import org.springframework.security.authentication.AuthenticationManager;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.winnerezy.Veo.models.User;
+import com.winnerezy.Veo.repositories.UserRepository;
 
 @Service
 public class UserService {
 
 
     private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
 
-    public UserService(UserRepository userRepository, AuthenticationManager authenticationManager) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
     }
 
     public List<User> allUsers() {

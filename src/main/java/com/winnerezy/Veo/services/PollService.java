@@ -8,7 +8,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.winnerezy.Veo.dto.PollDTO;
-import com.winnerezy.Veo.dto.VoteDTO;
 import com.winnerezy.Veo.exceptions.NoPollFound;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
