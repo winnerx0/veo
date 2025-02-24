@@ -53,7 +53,8 @@ const Login = () => {
   });
   return (
     <section className="min-h-full w-full flex items-center justify-center">
-      <div className="flex flex-col py-6 px-4 gap-4 border w-full max-w-[400px] rounded-2xl shadow-md">
+     <div className="w-full min-h-full grow flex items-center justify-center">
+     <div className="flex flex-col py-6 px-4 gap-4 w-full max-w-[600px]">
         <h1 className="text-3xl font-bold">Login To Veo</h1>
 
         <div>
@@ -105,6 +106,13 @@ const Login = () => {
           {isPending ? <span className="loader"></span> : "Login"}
         </Button>
       </div>
+     </div>
+     <div className="w-full min-h-full items-center justify-center hidden lg:flex">
+<section className="text-center">
+  <h1 className="font-bold text-4xl lg:text-6xl">Veo</h1>
+  <h2 className="font-bold text-2xl lg:text-3xl">Easy Voting</h2>
+</section>
+     </div>
     </section>
   );
 };
