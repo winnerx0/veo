@@ -2,9 +2,9 @@ spring:
   application:
     name: Veo
   datasource:
-    url: jdbc:postgresql://localhost/postgres
-    username: postgres # ${POSTGRES_USERNAME}
-    password: 2007 # ${POSTGRES_PASSWORD}
+    url: jdbc:postgresql://${POSTGRES_HOST}/${POSTGRES_DATABASE}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
