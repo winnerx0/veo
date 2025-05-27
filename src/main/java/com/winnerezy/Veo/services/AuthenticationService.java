@@ -63,9 +63,6 @@ public class AuthenticationService {
         if(user == null){
             throw  new RuntimeException("User not found");
         }
-
-
-
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
         return user;
