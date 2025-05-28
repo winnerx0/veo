@@ -40,7 +40,7 @@ const Create = () => {
 
   const navigate = useNavigate();
 
-  const hours = Array.from({ length: 12 }, (_, i) => i + 1);
+  const hours = Array.from({ length: 12 }, (_, i) => i);
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
       setDate(selectedDate);
@@ -48,26 +48,40 @@ const Create = () => {
   };
 
   const handleTimeChange = (
-    type: "hour" | "minute" | "ampm",
-    value: string
+      type: "hour" | "minute" | "ampm",
+      value: string
   ) => {
-    if (date) {
-      const newDate = new Date(date);
-      if (type === "hour") {
-        newDate.setHours(
-          (parseInt(value) % 12) + (newDate.getHours() >= 12 ? 12 : 0)
-        );
-      } else if (type === "minute") {
-        newDate.setMinutes(parseInt(value));
-      } else if (type === "ampm") {
-        const currentHours = newDate.getHours();
-        newDate.setHours(
-          value === "PM" ? currentHours + 12 : currentHours - 12
-        );
+      if (date) {
+          const newDate = new Date(date);
+          if (type === "hour") {
+              const hour = parseInt(value) % 12; // Convert to 12-hour format
+              // Set the hour based on the current AM/PM state
+              if (newDate.getHours() >= 12) {
+                  // If currently PM, add 12 to the selected hour
+                  newDate.setHours(hour + 12);
+              } else {
+                  // If currently AM, set the hour directly
+                  newDate.setHours(hour);
+              }
+          } else if (type === "minute") {
+              newDate.setMinutes(parseInt(value));
+          } else if (type === "ampm") {
+              const currentHours = newDate.getHours();
+              if (value === "PM") {
+                  if (currentHours < 12) {
+                      newDate.setHours(currentHours + 12); // Convert to PM
+                  }
+              } else if (value === "AM") {
+                  if (currentHours >= 12) {
+                      newDate.setHours(currentHours - 12); // Convert to AM
+                  }
+              }
+          }
+          setDate(newDate);
       }
-      setDate(newDate);
-    }
   };
+
+
 
   const form = useForm<z.infer<typeof PollValidator>>({
     resolver: zodResolver(PollValidator),

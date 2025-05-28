@@ -31,13 +31,11 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/oauth2/**", "/login/**") // only apply this chain to OAuth2 endpoints
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
-                .oauth2Login(oauth2 -> oauth2.defaultSuccessUrl("/home")
+                .securityMatcher( "/login/**") // only apply this chain to OAuth2 endpoints
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()
 
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)); // allow
-                                                                                                                 // sessions
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
