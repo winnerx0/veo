@@ -3,7 +3,9 @@ export declare type Poll = {
   title: string;
   ending: number[];
   options: Option[];
-  user: string;
+  user: {
+    email: string
+  };
 };
 
 export declare type Option = {

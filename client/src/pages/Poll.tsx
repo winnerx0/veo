@@ -128,7 +128,7 @@ const Poll = () => {
                       {formatDistance(new Date(data.ending), new Date())}
                     </span>
                   </p>
-                  {sub === data.user && (
+                  {sub === data.user.email && (
                     <DropdownMenu>
                       <DropdownMenuTrigger className="outline-none">
                         <Menu />
@@ -179,7 +179,7 @@ const Poll = () => {
           ) : (
             <div className="flex h-[calc(100dvh-200px)] justify-center items-center flex-col">
               <div className="w-full relative">
-                {sub === data.user && (
+                {sub === data.user.email && (
                   <DropdownMenu>
                     <DropdownMenuTrigger className="outline-none absolute right-0 top-0">
                       <Menu />

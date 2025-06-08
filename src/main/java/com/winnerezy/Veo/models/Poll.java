@@ -39,7 +39,7 @@ public class Poll {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    @JsonIncludeProperties("id")
+    @JsonIncludeProperties("email")
     private User user;
 
     public void setEnding(LocalDateTime ending){
