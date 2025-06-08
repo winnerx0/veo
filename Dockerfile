@@ -8,6 +8,6 @@ RUN chmod +x ./mvnw
 
 RUN ./mvnw package -DskipTests
 
-RUN cp /target/*.jar app.jar
+RUN cp target/*.jar app.jar
 
 CMD ["java","-jar","/app.jar"]
