@@ -10,4 +10,4 @@ RUN ./mvnw package -DskipTests
 
 RUN cp target/*.jar app.jar
 
-CMD ["java","-jar","/app.jar"]
+CMD ["java","-jar","app.jar"]
