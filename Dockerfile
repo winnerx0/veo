@@ -1,4 +1,4 @@
-FROM openjdk:21-jdk AS build
+FROM openjdk:21-jdk
 
 WORKDIR /app
 
@@ -8,8 +8,6 @@ RUN chmod +x ./mvnw
 
 RUN ./mvnw package -DskipTests
 
-ARG JAR_FILE=target/*.jar
+RUN cp /target/*.jar app.jar
 
-COPY --from=build /app/${JAR_FILE} app.jar
-
-ENTRYPOINT ["java","-jar","/app.jar"]
+CMD ["java","-jar","/app.jar"]
