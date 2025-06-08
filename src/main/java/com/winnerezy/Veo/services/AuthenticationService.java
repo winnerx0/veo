@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.winnerezy.Veo.enums.Role;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,7 @@ public class AuthenticationService {
     
     private final PasswordEncoder passwordEncoder;
     
-    private final AuthenticationManager authenticationManager;
+    private final AuthenticationProvider authenticationProvider;
 
     private final JwtService jwtService;
 
@@ -30,12 +31,12 @@ public class AuthenticationService {
 
     public AuthenticationService(
         UserRepository userRepository,
-        AuthenticationManager authenticationManager,
+        AuthenticationProvider authenticationProvider,
         PasswordEncoder passwordEncoder,
         JwtService jwtService,
         UserDetailsService userDetailsService
     ) {
-        this.authenticationManager = authenticationManager;
+        this.authenticationProvider = authenticationProvider;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
@@ -65,9 +66,10 @@ public class AuthenticationService {
         if(user == null){
             throw  new RuntimeException("User not found");
         }
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
+        authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword()));
 
         return user;
+
     }
 
     public boolean verifyToken(String token){

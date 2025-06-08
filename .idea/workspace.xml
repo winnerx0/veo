@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+    <list default="true" id="efbbfddf-8d1e-47ae-a365-219624136a79" name="Changes" comment="fixes:&#10;- Update docker file">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApplicationConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/config/ApplicationConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/winnerezy/Veo/services/AuthenticationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +140,7 @@
       <workItem from="1749304981728" duration="15018000" />
       <workItem from="1749320780460" duration="2771000" />
       <workItem from="1749365112115" duration="3937000" />
-      <workItem from="1749382752524" duration="648000" />
+      <workItem from="1749382752524" duration="1195000" />
     </task>
     <task id="LOCAL-00001" summary="Some minor changes">
       <option name="closed" value="true" />
@@ -174,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748422966128</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixes:&#10;- Update docker file">
+      <option name="closed" value="true" />
+      <created>1749383524200</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749383524200</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +203,7 @@
     <MESSAGE value="Some minor changes" />
     <MESSAGE value="update:&#10;- increase password size" />
     <MESSAGE value="change" />
-    <option name="LAST_COMMIT_MESSAGE" value="change" />
+    <MESSAGE value="fixes:&#10;- Update docker file" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes:&#10;- Update docker file" />
   </component>
 </project>
