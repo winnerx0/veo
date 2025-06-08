@@ -2,6 +2,7 @@ package com.winnerezy.Veo.config;
 
 import java.io.IOException;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
 
-       String token = request.getHeader("Authorization");
+       String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 
        if (token == null || !token.startsWith("Bearer ")) {
            filterChain.doFilter(request, response);
@@ -64,11 +65,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
-
-            filterChain.doFilter(request, response);
         } catch (Exception exception) {
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
+        filterChain.doFilter(request, response);
     }
 }
 

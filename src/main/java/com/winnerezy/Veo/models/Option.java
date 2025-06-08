@@ -1,27 +1,20 @@
 package com.winnerezy.Veo.models;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.CascadeType;
 
 @Entity
-@Table(name = "option")
+@Table(name = "options")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,14 +25,15 @@ public class Option {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "option", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Vote> votes = new ArrayList<>();
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "poll_id", nullable = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "poll_id")
+    @JsonIncludeProperties("id")
     private Poll poll;
+
+    @ManyToMany(mappedBy = "options")
+    @JsonIncludeProperties("username")
+    List<User> votes = new ArrayList<>();
 }

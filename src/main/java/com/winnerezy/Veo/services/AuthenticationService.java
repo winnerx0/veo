@@ -3,6 +3,7 @@ package com.winnerezy.Veo.services;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import com.winnerezy.Veo.enums.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,6 +51,7 @@ public class AuthenticationService {
         User user = new User();
         user.setUsername(registerDTO.getUsername());
         user.setEmail(registerDTO.getEmail());
+        user.setRole(Role.USER);
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
         user.setJoinedAt(LocalDate.now());
 

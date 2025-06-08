@@ -1,10 +1,11 @@
 package com.winnerezy.Veo.services;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import com.winnerezy.Veo.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import com.winnerezy.Veo.dto.PollDTO;
@@ -12,12 +13,11 @@ import com.winnerezy.Veo.exceptions.NoPollFound;
 import com.winnerezy.Veo.models.Option;
 import com.winnerezy.Veo.models.Poll;
 import com.winnerezy.Veo.models.User;
-import com.winnerezy.Veo.models.Vote;
 import com.winnerezy.Veo.repositories.OptionRepository;
 import com.winnerezy.Veo.repositories.PollRepository;
-import com.winnerezy.Veo.repositories.VoteRepository;
 
 @Service
+@Slf4j
 public class PollService {
 
     private final PollRepository pollRepository;
@@ -26,20 +26,19 @@ public class PollService {
 
     private final OptionRepository optionRepository;
 
-    private final VoteRepository voteRepository;
+    private final UserRepository userRepository;
 
-    public PollService(PollRepository pollRepository, VoteRepository voteRepository, UserService userService, OptionRepository optionRepository) {
+    public PollService(PollRepository pollRepository, UserService userService, OptionRepository optionRepository, UserRepository userRepository) {
         this.pollRepository = pollRepository;
         this.userService = userService;
         this.optionRepository = optionRepository;
-        this.voteRepository = voteRepository;
-
+        this.userRepository = userRepository;
     }
 
-    public Poll[] getPolls() {
-        Poll[] polls = pollRepository.findByUser(userService.getCurrentUser());
-        if (polls == null) {
-            return new Poll[0];
+    public List<Poll> getPolls() {
+        List<Poll> polls = pollRepository.findByUser(userService.getCurrentUser());
+        if (polls.isEmpty()) {
+            return Collections.emptyList();
         }
         return polls;
     }
@@ -94,39 +93,28 @@ public class PollService {
 
     public Poll editPoll(String pollId, PollDTO pollDTO) {
 
-        Poll poll = pollRepository.findById(pollId).orElseThrow(() -> new RuntimeException("No User Found"));
+        Poll poll = pollRepository.findById(pollId).orElseThrow(() -> new RuntimeException("Poll User Found"));
 
         poll.setTitle(pollDTO.getTitle());
 
         poll.setEnding(pollDTO.getEnding());
 
-        List<Option> options = poll.getOptions();
+        List<Option> options = pollDTO.getOptions();
 
-        List<Option> updatedOptions = new ArrayList<>();
-
-        for (Option newOption : pollDTO.getOptions()) {
-            Optional<Option> existingOption = options.stream()
-                    .filter(o -> o.getId().equals(newOption.getId()))
-                    .findFirst();
-
-            if (existingOption.isPresent()) {
-                Option opt = existingOption.get();
-                opt.setName(newOption.getName());
-                updatedOptions.add(opt);
-            } else {
-                newOption.setPoll(poll);
-                updatedOptions.add(newOption);
-            }
-            updatedOptions.forEach(option -> option.setPoll(poll));
-
-
-        }
-        poll.setOptions(updatedOptions);
+        options.forEach(option -> {
+            option.setName(option.getName());
+            option.setPoll(poll);
+            option.setId(option.getId());
+            optionRepository.save(option);
+        });
         return pollRepository.save(poll);
     }
 
     public String votePoll(String id, String optionId) {
-        Poll poll = pollRepository.findById(id).orElseThrow();
+
+        Poll poll = pollRepository.findById(id).orElseThrow(() -> new RuntimeException("Poll Not Found"));
+
+        Option option = optionRepository.findById(optionId).orElseThrow(() -> new RuntimeException("Option Not Found"));
 
         User user = userService.getCurrentUser();
 
@@ -134,22 +122,21 @@ public class PollService {
             return "Poll Ended";
         }
 
-        Option option = optionRepository.findByPollIdAndId(id, optionId).orElseThrow();
+        log.info("vote poll start");
 
-        boolean hasVoted = voteRepository.existsByUserIdAndPollId(userService.getCurrentUser().getId(), poll.getId());
+        boolean userVoted = optionRepository.hasUserVoted(user.getId(), id);
 
-        if (hasVoted) {
+        log.info("user has voted {}", userVoted);
+
+        if(userVoted){
+            log.info("Already Voted");
             throw new RuntimeException("User Already Voted");
-        } else {
-            Vote newVote = new Vote();
-            newVote.setUserId(user.getId());
-            newVote.setOption(option);
-            newVote.setPoll(poll);
-            voteRepository.save(newVote);
-            option.getVotes().add(newVote);
-            optionRepository.save(option);
-            return "Voted Successfully";
         }
+        user.getOptions().add(option);
+
+        userRepository.save(user);
+        log.info("poll {}", poll.getId());
+        return "Voted Successfully";
     }
 
     public List<Option> getVotes(String pollId){

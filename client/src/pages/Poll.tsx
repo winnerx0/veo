@@ -109,7 +109,7 @@ const Poll = () => {
   return (
     <Suspense fallback={<Loading />}>
       <section className="relative w-full flex justify-center items-center">
-        <div className="w-full max-w-5xl flex flex-col">
+        <div className="w-full max-w-3xl flex flex-col">
           {isLoading ? (
             <Loading />
           ) : !data ? (

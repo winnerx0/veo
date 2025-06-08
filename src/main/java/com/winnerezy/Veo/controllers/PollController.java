@@ -32,10 +32,9 @@ public class PollController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<Poll[]> getPolls() {
+    public ResponseEntity<List<Poll>> getPolls() {
         try {
-            Poll[] polls = pollService.getPolls();
-            return ResponseEntity.ok(polls);
+            return ResponseEntity.ok(pollService.getPolls());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -66,7 +65,7 @@ public class PollController {
         try {
             String delete = pollService.deletePoll(pollId);
             return ResponseEntity.ok(delete);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiErrorResponse(e.getMessage()));
         }
     }
@@ -91,7 +90,7 @@ public class PollController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(votePoll);
             }
             return ResponseEntity.ok(votePoll);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }

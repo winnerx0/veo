@@ -8,8 +8,6 @@ RUN chmod +x ./mvnw
 
 RUN ./mvnw package -DskipTests
 
-FROM openjdk:21-jdk
-
 ARG JAR_FILE=target/*.jar
 
 COPY --from=build /app/${JAR_FILE} app.jar
